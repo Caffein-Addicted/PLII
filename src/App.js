@@ -1,7 +1,10 @@
-import React from 'react';
-import Main from './Main';
+import logo from './logo.svg';
+import './App.css';
+import Router from './Shared/Router';
+
 function App() {
-  return <Main />;
+  return <Router />;
+
 }
 
 export default App;
