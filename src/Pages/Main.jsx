@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Main = () => {
+
   const [jazzVideos, setJazzVideos] = useState([]);
   const [kpopVideos, setKpopVideos] = useState([]);
   const [jpopVideos, setJpopVideos] = useState([]);
@@ -46,6 +47,7 @@ const Main = () => {
     fetchVideos();
   }, []);
 
+
   const renderVideos = (videos) => (
     <div
       style={{
@@ -78,6 +80,7 @@ const Main = () => {
       {renderVideos(edmVideos)}
       <h2>NCS</h2>
       {renderVideos(ncsVideos)}
+
     </div>
   );
 };
