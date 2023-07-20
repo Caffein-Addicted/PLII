@@ -8,7 +8,7 @@ const Side = () => {
   const getYoutubeVideos = async () => {
     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
-        // key: ,
+        key: AIzaSyCJlI79J6cyWmy3TlwB1DcafG3R5lvNT8s,
         type: 'video',
         part: 'snippet',
         videoCategoryId: '10',
@@ -17,6 +17,7 @@ const Side = () => {
     });
     setVideos(response.data.items);
   };
+  console.log({ videos });
 
   useEffect(() => {
     getYoutubeVideos();
