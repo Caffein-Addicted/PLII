@@ -3,10 +3,10 @@ import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import '../App.css';
+
 const App = () => {
   const [playlists, setPlaylists] = useState([]);
-  const [videos, setVideos] = useState([]);
-  const [selectedPlaylistId, setSelectedPlaylistId] = useState(null);
+  const [videosList, setVideosList] = useState({});
 
   const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw';
   const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
@@ -34,59 +34,53 @@ const App = () => {
         `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel_id}&maxResults=50&key=${api_key}`
       );
       setPlaylists(response.data.items);
+      response.data.items.forEach(async (playlist) => {
+        await fetchVideos(playlist.id);
+      });
     };
 
     fetchPlaylists();
   }, []);
 
-  useEffect(() => {
-    const fetchVideos = async () => {
-      if (selectedPlaylistId) {
-        const response = await axios.get(
-          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${selectedPlaylistId}&key=${api_key}`
-        );
-        setVideos(response.data.items);
-      }
-    };
-
-    fetchVideos();
-  }, [selectedPlaylistId]);
+  const fetchVideos = async (playlistId) => {
+    const response = await axios.get(
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${api_key}`
+    );
+    setVideosList((prevState) => ({ ...prevState, [playlistId]: response.data.items }));
+  };
 
   return (
     <>
-      <h1>유튜브 플레이리스트 목록</h1>
-      <div>
-        {playlists.map((playlist) => (
-          <div className="playlist-item" key={playlist.id} onClick={() => setSelectedPlaylistId(playlist.id)}>
+      <h1>PLII</h1>
+      {playlists.map((playlist) => (
+        <>
+          <div className="playlist-item" key={playlist.id}>
             <img src={playlist.snippet.thumbnails.default.url} alt={`${playlist.snippet.title} 썸네일`} />
             <span className="playlist-item-text">{playlist.snippet.title}</span>
           </div>
-        ))}
-      </div>
-      <h2>선택한 플레이리스트 영상 목록</h2>
-      <div>
-        {videos.length === 0 ? (
-          <p>플레이리스트를 클릭하여 영상 목록을 표시하세요.</p>
-        ) : (
-          <Carousel
-            responsive={responsive}
-            infinite={true}
-            containerClass="carousel-container"
-            itemClass="carousel-item-padding"
-          >
-            {videos.map((video) => (
-              <div className="card" key={video.id} style={{ textAlign: 'center', padding: '10px' }}>
-                <img
-                  style={{ maxWidth: '100%', maxHeight: 'auto' }}
-                  src={video.snippet.thumbnails.medium.url}
-                  alt={`${video.snippet.title} 썸네일`}
-                />
-                <h3>{video.snippet.title}</h3>
-              </div>
-            ))}
-          </Carousel>
-        )}
-      </div>
+          {videosList[playlist.id] && (
+            <div>
+              <Carousel
+                responsive={responsive}
+                infinite={true}
+                containerClass="carousel-container"
+                itemClass="carousel-item-padding"
+              >
+                {videosList[playlist.id].map((video) => (
+                  <div className="card" key={video.id} style={{ textAlign: 'center', padding: '10px' }}>
+                    <img
+                      style={{ maxWidth: '100%', maxHeight: 'auto' }}
+                      src={video.snippet.thumbnails.medium.url}
+                      alt={`${video.snippet.title} 썸네일`}
+                    />
+                    <h3>{video.snippet.title}</h3>
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          )}
+        </>
+      ))}
     </>
   );
 };
