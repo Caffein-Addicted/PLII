@@ -20,9 +20,9 @@ const Router = () => {
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/edit-profile/:id" element={<Editprofile />} />
-            <Route path="*" element={<Error />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="*" element={<Error />} /> {/* 맨 아래로 이동 */}
           </Routes>
         </Layout>
       </BrowserRouter>
