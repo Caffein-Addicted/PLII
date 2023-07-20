@@ -7,58 +7,24 @@ import Signin from '../Pages/Signin';
 import Signup from '../Pages/Signup';
 import Error from '../Pages/Error';
 import Category from '../Pages/Category';
-import Layout from '../Common/Layout';
+import Layout from '../Common/Layout/Layout';
 
 const Router = () => {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout>
-                <Main />
-              </Layout>
-            }
-          />
-          <Route
-            path="/category/:id"
-            element={
-              <Layout>
-                <Category />
-              </Layout>
-            }
-          />
-          <Route
-            path="/detail/:id"
-            element={
-              <Layout>
-                <Detail />
-              </Layout>
-            }
-          />
-          <Route
-            path="/mypage/:id"
-            element={
-              <Layout>
-                <Mypage />
-              </Layout>
-            }
-          />
-          <Route
-            path="/edit-profile/:id"
-            element={
-              <Layout>
-                <Editprofile />
-              </Layout>
-            }
-          />
-          <Route path="*" element={<Error />} />
-
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/category/:id" element={<Category />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/mypage/:id" element={<Mypage />} />
+            <Route path="/edit-profile/:id" element={<Editprofile />} />
+            <Route path="*" element={<Error />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </Layout>
       </BrowserRouter>
     </>
   );
