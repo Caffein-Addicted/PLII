@@ -7,7 +7,7 @@ import Signin from '../Pages/Signin';
 import Signup from '../Pages/Signup';
 import Error from '../Pages/Error';
 import Category from '../Pages/Category';
-import Layout from '../Common/Layout';
+import Layout from '../Common/Layout/Layout';
 
 const Router = () => {
   return (
