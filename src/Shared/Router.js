@@ -14,14 +14,48 @@ const Router = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Layout>
-            <Route path="/" element={<Main />} />
-            <Route path="/category/:id" element={<Category />} />
-            <Route path="/detail/:id" element={<Detail />} />
-            <Route path="/mypage/:id" element={<Mypage />} />
-            <Route path="/edit-profile/:id" element={<Editprofile />} />
-            <Route path="*" element={<Error />} />
-          </Layout>
+          <Route
+            path="/"
+            element={
+              <Layout>
+                <Main />
+              </Layout>
+            }
+          />
+          <Route
+            path="/category/:id"
+            element={
+              <Layout>
+                <Category />
+              </Layout>
+            }
+          />
+          <Route
+            path="/detail/:id"
+            element={
+              <Layout>
+                <Detail />
+              </Layout>
+            }
+          />
+          <Route
+            path="/mypage/:id"
+            element={
+              <Layout>
+                <Mypage />
+              </Layout>
+            }
+          />
+          <Route
+            path="/edit-profile/:id"
+            element={
+              <Layout>
+                <Editprofile />
+              </Layout>
+            }
+          />
+          <Route path="*" element={<Error />} />
+
           <Route path="/signin" element={<Signin />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
