@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
-const Header = () => {
+const Side = () => {
  
 
   const [videos, setVideos] = useState([]);
@@ -11,7 +10,7 @@ const Header = () => {
   const getYoutubeVideos = async () => {
     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
-        key: 'AIzaSyAU1zdu7JRM7jX_r0coaV8sVs93xKzBTHY',
+        // key: ,
         type: 'video',
         part: 'snippet',
         videoCategoryId: '10',
@@ -52,7 +51,7 @@ const Header = () => {
   return(
     <>
  
-        <h1>side로 이동합니다</h1>
+        <h1>검색</h1>
     <form onSubmit={(e)=>{e.preventDefault()}}>
       <input  placeholder="검색어를 입력하세요"
         onChange={getSearchData} ></input> 
@@ -75,4 +74,4 @@ const Header = () => {
   )
 };
 
-export default Header;
+export default Side;
