@@ -1,38 +1,58 @@
-.App {
-  text-align: center;
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 10px;
+  padding: 20px;
+  min-height: 360px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: 300px;
+  border-radius: 10px 10px 0 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0;
+  padding: 0 10px;
+}
+.carousel-container {
+  padding-left: 0px;
+  padding-right: 15px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.carousel-item-padding {
+  padding: 0px 0px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+}
+.playlist-item {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 10px;
+  padding: 20px;
+  min-height: 100px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.playlist-item img {
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 10px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.playlist-item-text {
+  font-size: 18px;
+  font-weight: bold;
 }

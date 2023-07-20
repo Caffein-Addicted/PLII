@@ -1,85 +1,88 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import '../App.css';
 
-const Main = () => {
-  const [jazzVideos, setJazzVideos] = useState([]);
-  const [kpopVideos, setKpopVideos] = useState([]);
-  const [jpopVideos, setJpopVideos] = useState([]);
-  const [classicVideos, setClassicVideos] = useState([]);
-  const [edmVideos, setEdmVideos] = useState([]);
-  const [ncsVideos, setNcsVideos] = useState([]);
+const App = () => {
+  const [playlists, setPlaylists] = useState([]);
+  const [videosList, setVideosList] = useState({});
 
-  const getYoutubeVideos = async (query, order = 'relevance') => {
-    const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
-      params: {
-        key: 'AIzaSyBSiHZU7LRMcHyxxs49Tn-P7vqHXUdQNL0',
-        type: 'video',
-        part: 'snippet',
-        q: query,
-        order: order,
-        videoCategoryId: '10',
-        maxResults: 5
-      }
-    });
-    return response.data.items;
+  const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw';
+  const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 4,
+      slidesToSlide: 1
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 3,
+      slidesToSlide: 1
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      slidesToSlide: 1
+    }
   };
 
   useEffect(() => {
-    const genres = ['jazz', 'kpop', 'jpop', 'classic', 'EDM', 'NCS'];
-    const setStateFunctions = [
-      setJazzVideos,
-      setKpopVideos,
-      setJpopVideos,
-      setClassicVideos,
-      setEdmVideos,
-      setNcsVideos
-    ];
-
-    const fetchVideos = async () => {
-      for (let i = 0; i < genres.length; i++) {
-        const genreVideos = await getYoutubeVideos(genres[i], genres[i] === 'jazz' ? 'viewCount' : undefined);
-        setStateFunctions[i](genreVideos);
-      }
+    const fetchPlaylists = async () => {
+      const response = await axios.get(
+        `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel_id}&maxResults=50&key=${api_key}`
+      );
+      setPlaylists(response.data.items);
+      response.data.items.forEach(async (playlist) => {
+        await fetchVideos(playlist.id);
+      });
     };
 
-    fetchVideos();
+    fetchPlaylists();
   }, []);
 
-  const renderVideos = (videos) => (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap'
-      }}
-    >
-      {videos.map((video) => (
-        <div key={video.id.videoId} style={{ margin: '10px' }}>
-          <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
-          <p dangerouslySetInnerHTML={{ __html: video.snippet.title }}></p>
-          <p>조회수: {video.statistics?.viewCount || 'N/A'}</p>
-        </div>
-      ))}
-    </div>
-  );
+  const fetchVideos = async (playlistId) => {
+    const response = await axios.get(
+      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${api_key}`
+    );
+    setVideosList((prevState) => ({ ...prevState, [playlistId]: response.data.items }));
+  };
 
   return (
-    <div>
+    <>
       <h1>PLII</h1>
-      <h2>Jazz</h2>
-      {renderVideos(jazzVideos)}
-      <h2>K-Pop</h2>
-      {renderVideos(kpopVideos)}
-      <h2>J-Pop</h2>
-      {renderVideos(jpopVideos)}
-      <h2>Classic</h2>
-      {renderVideos(classicVideos)}
-      <h2>EDM</h2>
-      {renderVideos(edmVideos)}
-      <h2>NCS</h2>
-      {renderVideos(ncsVideos)}
-    </div>
+      {playlists.map((playlist) => (
+        <>
+          <div className="playlist-item" key={playlist.id}>
+            <img src={playlist.snippet.thumbnails.default.url} alt={`${playlist.snippet.title} 썸네일`} />
+            <span className="playlist-item-text">{playlist.snippet.title}</span>
+          </div>
+          {videosList[playlist.id] && (
+            <div>
+              <Carousel
+                responsive={responsive}
+                infinite={true}
+                containerClass="carousel-container"
+                itemClass="carousel-item-padding"
+              >
+                {videosList[playlist.id].map((video) => (
+                  <div className="card" key={video.id} style={{ textAlign: 'center', padding: '10px' }}>
+                    <img
+                      style={{ maxWidth: '100%', maxHeight: 'auto' }}
+                      src={video.snippet.thumbnails.medium.url}
+                      alt={`${video.snippet.title} 썸네일`}
+                    />
+                    <h3>{video.snippet.title}</h3>
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          )}
+        </>
+      ))}
+    </>
   );
 };
 
-export default Main;
+export default App;
