@@ -47,7 +47,7 @@
 }
 
 .playlist-item img {
-  height: 60px; /* 이미지 높이를 변경할 수 있습니다. */
+  height: 60px;
   margin-right: 10px;
   border-radius: 10px;
 }
