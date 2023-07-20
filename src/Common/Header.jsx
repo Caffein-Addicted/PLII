@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
 const Side = () => {
- 
-
   const [videos, setVideos] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]); //검색후 초기화
 
@@ -24,54 +22,60 @@ const Side = () => {
     getYoutubeVideos();
   }, []);
 
-  const [userInput,setUserInput] = useState("");
-  
+  const [userInput, setUserInput] = useState('');
 
   const getSearchData = (e) => {
     setUserInput(e.target.value);
-    } 
+  };
 
   const searchHandler = () => {
-      if (userInput.trim() === "") {
-        return alert("검색어를 입력해주세요");
-      } else {
-        const filteredVideos = videos.filter((video) =>
+    if (userInput.trim() === '') {
+      return alert('검색어를 입력해주세요');
+    } else {
+      const filteredVideos = videos.filter((video) =>
         video.snippet.title.toLowerCase().includes(userInput.toLowerCase())
       );
       setFilteredVideos(filteredVideos);
     }
   };
-// 인풋값이 비어있을 때 원래 비디오 목록 보여주기 
+  // 인풋값이 비어있을 때 원래 비디오 목록 보여주기
   useEffect(() => {
-    if (userInput.trim() === "") {
+    if (userInput.trim() === '') {
       setFilteredVideos(videos);
     }
   }, [userInput, videos]);
 
-  return(
+  return (
     <>
- 
-        <h1>검색</h1>
-    <form onSubmit={(e)=>{e.preventDefault()}}>
-      <input  placeholder="검색어를 입력하세요"
-        onChange={getSearchData} ></input> 
-      <button onClick={() => {searchHandler()}}> 검색버튼 </button> 
-    </form>
-      <div> 
-      <h2>searchingPage</h2>
-        {
-          filteredVideos.map((video) => { 
-            return <div key={video.id}>
+      <h1>검색</h1>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+        }}
+      >
+        <input placeholder="검색어를 입력하세요" onChange={getSearchData}></input>
+        <button
+          onClick={() => {
+            searchHandler();
+          }}
+        >
+          {' '}
+          검색버튼{' '}
+        </button>
+      </form>
+      <div>
+        <h2>searchingPage</h2>
+        {filteredVideos.map((video) => {
+          return (
+            <div key={video.id}>
               <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
               <h3>{video.snippet.title}</h3>
-          </div>
-          })
-        }
+            </div>
+          );
+        })}
       </div>
-    
-   </>
-
-  )
+    </>
+  );
 };
 
 export default Side;

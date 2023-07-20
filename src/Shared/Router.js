@@ -8,6 +8,7 @@ import Signup from '../Pages/Signup';
 import Error from '../Pages/Error';
 import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
+import Search from '../Pages/Search';
 
 const Router = () => {
   return (
@@ -21,6 +22,7 @@ const Router = () => {
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/edit-profile/:id" element={<Editprofile />} />
             <Route path="*" element={<Error />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
           </Routes>

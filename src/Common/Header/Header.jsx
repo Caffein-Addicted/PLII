@@ -12,7 +12,7 @@ const Header = () => {
           <S.ProfileAvatar />
           <S.ProfileName>김선익</S.ProfileName>
         </S.ProfileWrap>
-        <p>로그인하고 숨은 플s리 듣기</p>
+        <p>로그인하고 숨은 플리 듣기</p>
         <S.Button varient="solid">AI 플리 찾기</S.Button>
       </S.Header>
     </>
