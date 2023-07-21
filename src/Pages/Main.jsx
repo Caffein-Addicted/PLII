@@ -3,6 +3,8 @@ import axios from 'axios';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import '../App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const App = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -34,7 +36,9 @@ const App = () => {
       const response = await axios.get(
         `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel_id}&maxResults=50&key=${api_key}`
       );
+
       setPlaylists(response.data.items);
+
       response.data.items.forEach(async (playlist) => {
         await fetchVideos(playlist.id);
       });
@@ -52,13 +56,14 @@ const App = () => {
 
   return (
     <>
-      <h1>PLII</h1>
       {playlists.map((playlist) => (
         <>
-          <div className="playlist-item" key={playlist.id}>
-            <img src={playlist.snippet.thumbnails.default.url} alt={`${playlist.snippet.title} 썸네일`} />
-            <span className="playlist-item-text">{playlist.snippet.title}</span>
-          </div>
+          <Link to={`/detail/${playlist.id}`}>
+            <div className="playlist-item" key={playlist.id}>
+              <img src={playlist.snippet.thumbnails.default.url} alt={`${playlist.snippet.title} 썸네일`} />
+              <span className="playlist-item-text">{playlist.snippet.title}</span>
+            </div>
+          </Link>
           {videosList[playlist.id] && (
             <div>
               <Carousel

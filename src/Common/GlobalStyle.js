@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
         --color-black : #000;
         --color-black-300 : #393939;
         --color-gray : #999;
-
     }
 
     * {
@@ -25,6 +24,10 @@ const GlobalStyle = createGlobalStyle`
     button, a{
         cursor: pointer;
         &:hover { cursor: pointer; }
+    }
+    a{
+        color: #fff;
+        line-height: 1.8;
     }
 
 `;

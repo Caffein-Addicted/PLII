@@ -1,27 +1,21 @@
-import React from 'react';
-import { useQuery } from 'react-query';
-import axios from 'axios';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { __getYoutubeData } from '../Redux/modules/youtubeDataSlice';
 
 const Detail = () => {
-  const { data, isLoading, isError, error } = useQuery('searchData', async () => {
-    const response = await axios.get('http://localhost:4000/searchData');
-    return response.data;
+  const disPatch = useDispatch();
+
+  const { youtubeDatas } = useSelector((state) => {
+    return state.youtubeDataSlice.youtubeDatas;
   });
 
-  if (isLoading) {
-    return <div>검색 결과를 찾고 있어요.</div>;
-  }
-  if (isError) {
-    return <div>{error.message}</div>;
-  }
+  useEffect(() => {
+    disPatch(__getYoutubeData());
+  }, []);
 
   return (
     <>
-      <ul>
-        {data[1].map((item) => {
-          return <li key={item.snippet.id}>{item.snippet.title}</li>;
-        })}
-      </ul>
+      <div></div>
     </>
   );
 };

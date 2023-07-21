@@ -1,49 +1,8 @@
 {
-  "searchData": [
-    [
-      {
-        "kind": "youtube#playlist",
-        "etag": "m1-lQnyqJlIEzJbr6l2Dk911Ask",
-        "id": "PLhD80yCklGmaY0qVqxuw4BQ4rPv1pmZEw",
-        "snippet": {
-          "publishedAt": "2023-07-20T06:30:54Z",
-          "channelId": "UCRbI1cqUoaea8LTJA2q9ShA",
-          "title": "시원한 여름노래",
-          "description": "",
-          "thumbnails": {
-            "default": {
-              "url": "https://i.ytimg.com/vi/JC6budcACNE/default.jpg",
-              "width": 120,
-              "height": 90
-            },
-            "medium": {
-              "url": "https://i.ytimg.com/vi/JC6budcACNE/mqdefault.jpg",
-              "width": 320,
-              "height": 180
-            },
-            "high": {
-              "url": "https://i.ytimg.com/vi/JC6budcACNE/hqdefault.jpg",
-              "width": 480,
-              "height": 360
-            },
-            "standard": {
-              "url": "https://i.ytimg.com/vi/JC6budcACNE/sddefault.jpg",
-              "width": 640,
-              "height": 480
-            },
-            "maxres": {
-              "url": "https://i.ytimg.com/vi/JC6budcACNE/maxresdefault.jpg",
-              "width": 1280,
-              "height": 720
-            }
-          },
-          "channelTitle": "봉봉",
-          "localized": {
-            "title": "시원한 여름노래",
-            "description": ""
-          }
-        }
-      }
-    ]
+  "youtubeDatas": [
+    {
+      "id": 1,
+      "title": "hello world"
+    }
   ]
 }
