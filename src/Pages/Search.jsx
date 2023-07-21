@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../App.css';
 
 const Search = () => {
   const [videos, setVideos] = useState([]);
@@ -57,32 +58,37 @@ const Search = () => {
 
   return (
     <>
-    <div>
-      <h1>검색</h1>
-      <form onSubmit={(e) => { e.preventDefault(); }}>
+    <div className="playlist-item">
+        <form onSubmit={(e) => { e.preventDefault(); }}>
         <input
+          className="searching"
           placeholder="검색어를 입력하세요"
           onChange={getSearchData}
         ></input>
-        <button onClick={() => { searchHandler(); }}>검색버튼</button>
+        <button 
+        className="searchBtn"
+        onClick={() => { searchHandler(); }}> 검색 </button>
       </form>
       </div>
-      <div>
-        <h2>searchingArea</h2>
+      <div className="search-list">        
+        <div className="card">
         {filteredVideos.length === 0 ? (
           <p>검색 결과가 없습니다.</p>
         ) : (
           filteredVideos.map((video) => {
             return (
+              <div className='search-item'>
               <div key={video.id}>
                 <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
-                <h3>{video.snippet.title}</h3>
+                <p className="playlist-item-text">{video.snippet.title}</p>
+              </div>
               </div>
             );
           })
         )}
+        </div>
       </div>
-   </>
+       </>
   );
 };
 

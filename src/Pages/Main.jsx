@@ -52,7 +52,6 @@ const App = () => {
 
   return (
     <>
-      <h1>PLII</h1>
       {playlists.map((playlist) => (
         <>
           <div className="playlist-item" key={playlist.id}>

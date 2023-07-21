@@ -56,3 +56,26 @@
   font-size: 18px;
   font-weight: bold;
 }
+
+.searching {
+  border: 1px solid gray;
+  border-radius: 10px;
+  height: 30px;
+  width: 250px;
+  text-align: center;
+  margin: 10px;
+}
+
+.search-list {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: 10px;
+  padding: 30px;
+  min-height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
