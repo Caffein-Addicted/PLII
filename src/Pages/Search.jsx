@@ -1,63 +1,88 @@
-import React from 'react';
-import { useQuery, useMutation } from 'react-query';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import uuid from 'react-uuid';
 
 const Search = () => {
-  const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw';
-  const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
+  const [videos, setVideos] = useState([]);
+  const [filteredVideos, setFilteredVideos] = useState([]);
+  const [userInput, setUserInput] = useState("");
 
-  const { data, isLoading, isError, error } = useQuery('data', async () => {
-    const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel_id}&maxResults=50&key=${api_key}`
-    );
-    return response.data.items;
-  });
+  const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw'; 
 
-  const mutation = useMutation(async () => {
-    await axios.post('http://localhost:4000/searchData', data);
-  });
+  
+  useEffect(() => {
+    const fetchPlaylistsAndVideos = async () => {
+      const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
 
-  const mutation2 = useMutation(async () => {
-    await axios.post('http://localhost:4000/searchData', {
-      id: uuid(),
-      title: '하하'
-    });
-  });
+      try {
+        const responsePlaylists = await axios.get(
+          `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel_id}&maxResults=50&key=${api_key}`
+        );
 
-  if (isLoading) {
-    return <div>검색 결과를 찾고 있어요.</div>;
-  }
-  if (isError) {
-    return <div>{error.message}</div>;
-  }
+        const playlists = responsePlaylists.data.items;
+        const videoPromises = playlists.map(async (playlist) => {
+          const responseVideos = await axios.get(
+            `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlist.id}&key=${api_key}`
+          );
+          return responseVideos.data.items;
+        });
+
+        const videoLists = await Promise.all(videoPromises);
+        const allVideos = videoLists.flat();
+        setVideos(allVideos);
+        setFilteredVideos(allVideos); 
+      } catch (error) {
+        console.error('Error fetching videos:', error);
+      }
+    };
+
+    fetchPlaylistsAndVideos();
+  }, []);
+
+  const getSearchData = (e) => {
+    setUserInput(e.target.value);
+  };
+
+  const searchHandler = () => {
+    const trimmedInput = userInput.trim();
+    if (trimmedInput === "") {
+       //alert("검색어를 입력해주세요");
+      setFilteredVideos(videos);
+    } else {
+      const filteredVideos = videos.filter((video) =>
+        video.snippet.title.replace(/\s/g, '').toLowerCase().includes(trimmedInput.replace(/\s/g, '').toLowerCase())
+      );
+      setFilteredVideos(filteredVideos);
+    }
+  };
 
   return (
     <>
-      <button
-        onClick={() => {
-          mutation.mutate();
-        }}
-      >
-        데이터 추가
-      </button>
-      <button
-        onClick={() => {
-          mutation2.mutate();
-        }}
-      >
-        데이터 추가2
-      </button>
-      <div>
-        {data.map((item) => {
-          return (
-            <>
-              <div key={item.id}>{item.id}</div>
-            </>
-          );
-        })}
+    <div>
+      <h1>검색</h1>
+      <form onSubmit={(e) => { e.preventDefault(); }}>
+        <input
+          placeholder="검색어를 입력하세요"
+          onChange={getSearchData}
+        ></input>
+        <button onClick={() => { searchHandler(); }}>검색버튼</button>
+      </form>
       </div>
-    </>
+      <div>
+        <h2>searchingArea</h2>
+        {filteredVideos.length === 0 ? (
+          <p>검색 결과가 없습니다.</p>
+        ) : (
+          filteredVideos.map((video) => {
+            return (
+              <div key={video.id}>
+                <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
+                <h3>{video.snippet.title}</h3>
+              </div>
+            );
+          })
+        )}
+      </div>
+   </>
   );
 };
 
