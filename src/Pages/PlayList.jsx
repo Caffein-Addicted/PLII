@@ -7,6 +7,7 @@ const Playlist = () => {
   const { videosList, playlists } = useContext(YoutubeDataContext);
   const { playlistId } = useParams();
   const playlist = playlists.find((p) => p.id === playlistId);
+  const totalCount = videosList[playlistId] ? videosList[playlistId].length : 0;
   const scrollBarStyle = `
     ::-webkit-scrollbar {
       width: 8px;
@@ -77,6 +78,7 @@ const Playlist = () => {
                 {playlist.snippet.title}
               </h2>
               <p>{playlist.snippet.description}</p>
+              <p>노래 {totalCount}곡</p>
             </div>
           </div>
           <div style={videoListStyle}>
