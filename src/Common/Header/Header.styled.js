@@ -3,6 +3,7 @@ import * as Style from '../Style';
 import { Link } from 'react-router-dom';
 
 export const Header = styled.header({
+  top: '0',
   position: 'fixed',
   width: '245px',
   height: '100%',
