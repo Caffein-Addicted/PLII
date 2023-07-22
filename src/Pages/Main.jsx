@@ -35,17 +35,17 @@ const Main = () => {
     >
       {playlists.map((playlist) => (
         <>
-          <Link
-            to={`/playlist/${playlist.id}`}
-            style={{
-              textDecoration: 'none',
-              color: 'white'
-            }}
-          >
-            <div className="playlist-item" key={playlist.id}>
+          <div className="playlist-item" key={playlist.id}>
+            <Link
+              to={`/playlist/${playlist.id}`}
+              style={{
+                textDecoration: 'none',
+                color: 'white'
+              }}
+            >
               <span className="playlist-item-text">{playlist.snippet.title}</span>
-            </div>
-          </Link>
+            </Link>
+          </div>
 
           {videosList[playlist.id] && (
             <div>

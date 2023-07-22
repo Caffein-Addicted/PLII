@@ -8,6 +8,8 @@ import { YoutubeDataProvider } from './context/YoutubeDataContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const queryClient = new QueryClient();
+
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
