@@ -23,7 +23,7 @@ const Header = () => {
               <Link to="/search">검색</Link>
             </li>
             <li>
-              <Link to="/">투데이</Link>
+              <Link to="/detail/2">디테일</Link>
             </li>
             <li>
               <Link to="/">투데이</Link>

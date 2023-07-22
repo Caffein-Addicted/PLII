@@ -5,14 +5,14 @@ import { getFirestore } from 'firebase/firestore';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// KEY 값 보호를 위해 코드를 유지해주세요.
 const firebaseConfig = {
-  apiKey: 'AIzaSyDskuvV6czF_rKya7b0ySN6X1gsxwHEpCo',
-  authDomain: 'in-vision-4681f.firebaseapp.com',
-  projectId: 'in-vision-4681f',
-  storageBucket: 'in-vision-4681f.appspot.com',
-  messagingSenderId: '395877274015',
-  appId: '1:395877274015:web:a94f2edc28d89677e12daa'
+  apiKey: process.env.REACT_APP_FB_API_KEY,
+  authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 // Initialize Firebase

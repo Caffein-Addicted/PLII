@@ -24,15 +24,18 @@ export const youtubeDataSlice = createSlice({
   initialState: initialState,
   reducers: {},
   extraReducers: {
+    [__getYoutubeData.pending]: (state, action) => {
+      console.log('진행중');
+      state.isLoading = true;
+      state.isError = false;
+    },
     [__getYoutubeData.fulfilled]: (state, action) => {
       console.log('완료');
-      state.isLoading = true;
-    },
-    [__getYoutubeData.pending]: (state, action) => {
-      console.log('처리중');
       state.isLoading = false;
+      state.isError = false;
       state.youtubeDatas = action.payload;
     },
+
     [__getYoutubeData.rejected]: (state, action) => {
       console.log('실패');
       state.isLoading = false;
