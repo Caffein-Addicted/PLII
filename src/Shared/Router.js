@@ -9,7 +9,6 @@ import Error from '../Pages/Error';
 import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
 import Search from '../Pages/Search';
-
 const Router = () => {
   return (
     <>
