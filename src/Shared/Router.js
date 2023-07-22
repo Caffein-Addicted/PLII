@@ -9,6 +9,7 @@ import Error from '../Pages/Error';
 import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
 import Search from '../Pages/Search';
+import PlayList from '../Pages/PlayList';
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Layout>
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route path="/playlist/:playlistId" element={<PlayList />} />
             <Route path="/category/:id" element={<Category />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/mypage/:id" element={<Mypage />} />

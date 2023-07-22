@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
+import { YoutubeDataContext } from '../context/YoutubeDataContext';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import '../App.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const App = () => {
-  const [playlists, setPlaylists] = useState([]);
-  const [videosList, setVideosList] = useState({});
-
-  const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
+const Main = () => {
+  const { playlists, videosList } = useContext(YoutubeDataContext);
 
   const responsive = {
     desktop: {
@@ -30,42 +26,32 @@ const App = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchPlaylists = async () => {
-      const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel_id}&maxResults=50&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
-      );
-
-      setPlaylists(response.data.items);
-
-      response.data.items.forEach(async (playlist) => {
-        await fetchVideos(playlist.id);
-      });
-    };
-
-    fetchPlaylists();
-  }, []);
-
-  const fetchVideos = async (playlistId) => {
-    const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${process.env.REACT_APP_YOUTUBE_API_KEY}`
-    );
-    setVideosList((prevState) => ({ ...prevState, [playlistId]: response.data.items }));
-  };
-
   return (
-    <>
+    <div
+      style={{
+        backgroundColor: 'black',
+        top: 0
+      }}
+    >
       {playlists.map((playlist) => (
         <>
-          <Link to={`/detail/${playlist.id}`}>
+          <Link
+            to={`/playlist/${playlist.id}`}
+            style={{
+              textDecoration: 'none',
+              color: 'white'
+            }}
+          >
             <div className="playlist-item" key={playlist.id}>
-              <img src={playlist.snippet.thumbnails.default.url} alt={`${playlist.snippet.title} 썸네일`} />
               <span className="playlist-item-text">{playlist.snippet.title}</span>
             </div>
           </Link>
+
           {videosList[playlist.id] && (
             <div>
               <Carousel
+                autoPlay
+                autoPlaySpeed={2000}
                 responsive={responsive}
                 infinite={true}
                 containerClass="carousel-container"
@@ -86,8 +72,8 @@ const App = () => {
           )}
         </>
       ))}
-    </>
+    </div>
   );
 };
 
-export default App;
+export default Main;
