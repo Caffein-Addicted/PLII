@@ -6,13 +6,16 @@ import reportWebVitals from './reportWebVitals';
 // 1. 리덕스에 필요한 코드 import
 import { Provider } from 'react-redux';
 import store from './redux/config';
+import { YoutubeDataProvider } from './context/YoutubeDataContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <YoutubeDataProvider>
+        <App />
+      </YoutubeDataProvider>
     </Provider>
   </React.StrictMode>
 );
