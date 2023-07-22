@@ -1,7 +1,7 @@
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../App.css';
+import { useParams } from 'react-router-dom';
 
 const Search = () => {
   const [videos, setVideos] = useState([]);
@@ -44,6 +44,8 @@ const Search = () => {
     setUserInput(e.target.value);
   };
 
+  const { inputValue } = useParams();
+
   const searchHandler = () => {
     const trimmedInput = userInput.trim();
     if (trimmedInput === "") {
@@ -53,18 +55,21 @@ const Search = () => {
       const filteredVideos = videos.filter((video) =>
         video.snippet.title.replace(/\s/g, '').toLowerCase().includes(trimmedInput.replace(/\s/g, '').toLowerCase())
       );
+
       setFilteredVideos(filteredVideos);
     }
   };
 
   return (
     <>
+    <div>{inputValue}</div>
     <div className="playlist-item">
-        <form onSubmit={(e) => { e.preventDefault(); }}>
+      <form onSubmit={(e) => { e.preventDefault(); }}>
         <input
           className="searching"
           placeholder="검색어를 입력하세요"
           onChange={getSearchData}
+          
         ></input>
         <button 
         className="searchBtn"

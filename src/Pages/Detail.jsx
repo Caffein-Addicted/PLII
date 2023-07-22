@@ -1,27 +1,21 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { useContext } from 'react';
+import { YoutubeDataContext } from '../context/YoutubeDataContext';
+import { useParams } from 'react-router-dom';
 
 const Detail = () => {
-  const { data, isLoading, isError, error } = useQuery('searchData', async () => {
-    const response = await axios.get('http://localhost:4000/searchData');
-    return response.data;
-  });
+  
+  const { videosList, playlists } = useContext(YoutubeDataContext);
+  const { inputValue } = useParams();
 
-  if (isLoading) {
-    return <div>검색 결과를 찾고 있어요.</div>;
-  }
-  if (isError) {
-    return <div>{error.message}</div>;
-  }
+
+  console.log("data : ", videosList);
 
   return (
     <>
-      <ul>
-        {data[1].map((item) => {
-          return <li key={item.snippet.id}>{item.snippet.title}</li>;
-        })}
-      </ul>
+     데이터 테스트 :
     </>
   );
 };
