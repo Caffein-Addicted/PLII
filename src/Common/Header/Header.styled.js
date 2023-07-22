@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import * as Style from '../Style';
 
 export const Header = styled.header({
-  top:0,
+  top: '0',
   position: 'fixed',
   width: '245px',
   height: '100%',

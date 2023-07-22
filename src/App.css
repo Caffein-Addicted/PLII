@@ -33,49 +33,42 @@
   justify-content: center;
 }
 .playlist-item {
-  background-color: #fff;
+  margin-top: 0;
+  background-color: black;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
+  width: 800px;
   margin: 10px;
   padding: 20px;
   min-height: 100px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   cursor: pointer;
-}
-
-.playlist-item img {
-  height: 60px;
-  margin-right: 10px;
-  border-radius: 10px;
 }
 
 .playlist-item-text {
-  font-size: 18px;
+  font-size: 40px;
   font-weight: bold;
 }
-
-.searching {
-  border: 1px solid gray;
-  border-radius: 10px;
-  height: 30px;
-  width: 250px;
-  text-align: center;
-  margin: 10px;
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-.search-list {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  margin: 10px;
-  padding: 30px;
-  min-height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+/* 스크롤바 트랙 (바탕색) */
+::-webkit-scrollbar-track {
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+/* 스크롤바 썸 (스크롤바 자체) */
+::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 4px;
+}
+
+/* 스크롤바 활성화 시 썸 스타일 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #a0a0a0;
 }
