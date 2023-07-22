@@ -6,16 +6,21 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './Redux/config/configStore';
 import { YoutubeDataProvider } from './context/YoutubeDataContext';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+let queryClient = new QueryClient(); //캐시와 훅을 쓸수있게 정의
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <YoutubeDataProvider>
-        <App />
-      </YoutubeDataProvider>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <YoutubeDataProvider>
+          <App />
+        </YoutubeDataProvider>
+      </Provider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 

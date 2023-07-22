@@ -18,7 +18,7 @@ const GlobalStyle = createGlobalStyle`
     }
     
     html {
-        background-color: var(--color-gray);
+        background-color: var(--color-black);
     }
 
     button, a{
