@@ -8,12 +8,6 @@ import { Link } from 'react-router-dom';
 const Main = () => {
   const { playlists, videosList } = useContext(YoutubeDataContext);
 
-<<<<<<< HEAD
-  const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw';
-  const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
-
-=======
->>>>>>> dev
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },

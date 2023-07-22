@@ -1,100 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import '../App.css';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "../App.css";
+import { useParams } from "react-router-dom";
 
 const Search = () => {
+
   const [videos, setVideos] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
-  const [userInput, setUserInput] = useState("");
+  const { inputValue } = useParams();
+  const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw';;
+  const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
 
-  const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw'; 
 
-  
+
   useEffect(() => {
     const fetchPlaylistsAndVideos = async () => {
-      const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
-
       try {
-        const responsePlaylists = await axios.get(
+        const { data: { items: playlists } } = await axios.get(
           `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channel_id}&maxResults=50&key=${api_key}`
         );
 
-        const playlists = responsePlaylists.data.items;
         const videoPromises = playlists.map(async (playlist) => {
-          const responseVideos = await axios.get(
+          const { data: { items: videos } } = await axios.get(
             `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlist.id}&key=${api_key}`
           );
-          return responseVideos.data.items;
+          return videos;
         });
+
 
         const videoLists = await Promise.all(videoPromises);
         const allVideos = videoLists.flat();
         setVideos(allVideos);
-        setFilteredVideos(allVideos); 
+        setFilteredVideos(allVideos);
       } catch (error) {
-        console.error('Error fetching videos:', error);
+        console.error("Error fetching videos:", error);
       }
     };
 
     fetchPlaylistsAndVideos();
   }, []);
-
-  const getSearchData = (e) => {
-    setUserInput(e.target.value);
-  };
-
-  const { inputValue } = useParams();
-
-  const searchHandler = () => {
-    const trimmedInput = userInput.trim();
-    if (trimmedInput === "") {
-       //alert("검색어를 입력해주세요");
-      setFilteredVideos(videos);
-    } else {
-      const filteredVideos = videos.filter((video) =>
-        video.snippet.title.replace(/\s/g, '').toLowerCase().includes(trimmedInput.replace(/\s/g, '').toLowerCase())
+ 
+  useEffect(() => {
+    const trimmedInput = inputValue.trim().replace(/\s/g, "").toLowerCase();
+    if (!trimmedInput) {setFilteredVideos(videos);}
+    else {
+      const filterVideos = videos.filter((video) =>
+        video.snippet.title.replace(/\s/g, "").toLowerCase().includes(trimmedInput)
       );
-
-      setFilteredVideos(filteredVideos);
+      setFilteredVideos(filterVideos);
     }
-  };
-
+  }, [inputValue, videos]);
+ 
   return (
     <>
-    <div>{inputValue}</div>
-    <div className="playlist-item">
-      <form onSubmit={(e) => { e.preventDefault(); }}>
-        <input
-          className="searching"
-          placeholder="검색어를 입력하세요"
-          onChange={getSearchData}
-          
-        ></input>
-        <button 
-        className="searchBtn"
-        onClick={() => { searchHandler(); }}> 검색 </button>
-      </form>
-      </div>
-      <div className="search-list">        
+
+      <div className="search-list">
         <div className="card">
-        {filteredVideos.length === 0 ? (
-          <p>검색 결과가 없습니다.</p>
-        ) : (
-          filteredVideos.map((video) => {
-            return (
-              <div className='search-item'>
-              <div key={video.id}>
-                <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
-                <p className="playlist-item-text">{video.snippet.title}</p>
-              </div>
-              </div>
-            );
-          })
-        )}
+          {filteredVideos.length === 0 ? (
+            <p>검색결과가 없습니다. </p>
+          ) : (
+            filteredVideos.map((video) => {
+              return (
+                <div className="search-item" key={video.id}>
+                  <img
+                    src={video.snippet.thumbnails.high.url}
+                    alt={video.snippet.title}
+                  />
+                  <p className="playlist-item-text">{video.snippet.title}</p>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
-       </>
+    </>
   );
 };
 
