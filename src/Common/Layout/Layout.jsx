@@ -6,7 +6,7 @@ import * as S from './Layout.styled';
 const Layout = ({ children }) => {
   return (
     <>
-      <Header />
+      <Header></Header>
       <S.ContentWrapper>
         {children}
         <Footer />

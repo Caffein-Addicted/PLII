@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
+import { db } from '../firebase';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { query, where, getDocs } from 'firebase/firestore';
 import { app } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getUserInfo } from '../redux/UserInfo';
 
 const Signup = () => {
   // 입력값을 상태로 관리하기 위한 useState 훅 사용
@@ -9,9 +14,23 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
-  const [nickname, setNickname] = useState('');
+  const [nickName, setNickname] = useState('');
   const [bio, setBio] = useState(''); // 사용자의 소개글을 저장하는 상태 추가
   const [error, setError] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const fetchUserData = async () => {
+    const dbUsers = query(collection(db, 'users'), where('email', '==', email));
+
+    const usersData = [];
+
+    const userSnapshot = await getDocs(dbUsers);
+    userSnapshot.forEach((doc) => {
+      usersData.push(doc.data());
+    });
+    dispatch(getUserInfo(...usersData));
+  };
 
   // 각 입력값의 변경을 처리하는 이벤트 핸들러 함수들
   const handleEmailChange = (e) => {
@@ -77,7 +96,7 @@ const Signup = () => {
     }
 
     // 닉네임과 소개글 유효성 검사
-    if (!nickname) {
+    if (!nickName) {
       setError('닉네임을 입력해주세요.');
       return;
     }
@@ -98,12 +117,15 @@ const Signup = () => {
         uid: user.uid,
         email: user.email,
         name: name,
-        nickname: nickname,
-        bio: bio // 소개글도 사용자 정보에 추가로 저장
+        nickName: nickName,
+        bio: bio, // 소개글도 사용자 정보에 추가로 저장
+        imgfile: ''
       });
 
       console.log('회원 정보 저장 완료');
       window.alert('회원가입이 성공적으로 완료되었습니다.');
+      fetchUserData();
+      navigate('/');
     } catch (error) {
       console.error('회원가입 실패:', error.message);
       window.alert('회원가입에 실패했습니다. 다시 시도해주세요.');
@@ -133,15 +155,15 @@ const Signup = () => {
         </div>
         <div>
           <label>닉네임:</label>
-          <input type="text" value={nickname} onChange={handleNicknameChange} />
+          <input type="text" value={nickName} onChange={handleNicknameChange} />
         </div>
         <div>
           <label>소개글:</label>
-          <textarea value={bio} onChange={handleBioChange} />
+          <textarea style={{ resize: 'none' }} value={bio} onChange={handleBioChange} />
         </div>
         {error && <div style={{ color: 'red' }}>{error}</div>}
-        <button type="button" onClick={handleSignup}>
-          회원가입
+        <button style={{ width: '70px' }} type="button" onClick={handleSignup}>
+          등록
         </button>
       </form>
     </div>

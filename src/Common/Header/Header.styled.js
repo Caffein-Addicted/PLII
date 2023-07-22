@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import * as Style from '../Style';
+import { Link } from 'react-router-dom';
 
 export const Header = styled.header({
   position: 'fixed',
@@ -44,4 +45,12 @@ export const ProfileName = styled.h3`
   font-size: 18px;
   color: var(--color-gray);
   margin-left: 9px;
+`;
+
+export const ProfileLoginLink = styled(Link)`
+  font-size: 18px;
+  color: var(--color-gray);
+  margin-left: 9px;
+  text-decoration: none;
+  cursor: pointer;
 `;
