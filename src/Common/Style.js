@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { variant } from 'styled-system';
 
 const buttonVariants = {
   solid: {
@@ -14,14 +15,15 @@ const buttonVariants = {
 
 export const Button = styled.button(
   {
-    minHeight: '40px',
-    fontSize: '14px',
+    height: '48px',
+    fontSize: '16px',
     fontWeight: '700',
     padding: '8px 48px',
     border: '1px solid var(--color-black)',
     lineHeight: '1',
     borderRadius: '4px'
   },
+
   ({ variant = 'solid' }) => buttonVariants[variant]
   // ({ variant = 'outline' }) => buttonVariants[variant]
 );

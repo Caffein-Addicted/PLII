@@ -58,30 +58,35 @@ const Signin = () => {
 
   return (
     <S.Signin>
+      <S.SignBgOverlay />
       <S.SigninCard>
         <S.Title>로그인</S.Title>
         <form>
           <S.ButtonGoogle>
             <img src={ButtonGoogle} alt="Button Google" />
           </S.ButtonGoogle>
-          <div>
-            <label>이메일:</label>
-            <input type="text" value={email} onChange={handleEmailChange} />
-          </div>
-          <div>
-            <label>비밀번호:</label>
-            <input type="password" value={password} onChange={handlePasswordChange} />
-          </div>
-          <button type="button" onClick={handleLogin}>
+          <S.DivisionLine>
+            <S.DivisionText>또는 이메일 로그인</S.DivisionText>
+          </S.DivisionLine>
+          <S.InputItem>
+            <S.Label>이메일:</S.Label>
+            <S.Input type="text" value={email} onChange={handleEmailChange} />
+          </S.InputItem>
+          <S.InputItem>
+            <S.Label>비밀번호:</S.Label>
+            <S.Input type="password" value={password} onChange={handlePasswordChange} />
+          </S.InputItem>
+          <S.Button type="button" onClick={handleLogin}>
             로그인
-          </button>
+          </S.Button>
         </form>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div>
+        {error && <p style={{ color: 'red', marginTop: '4px', fontSize: '14px' }}>{error}</p>}
+        <S.AuthLink>
+          아직 회원이 아니신가요?
           <Link to="/signup">
-            <button>회원가입</button>
+            <S.ButtonText>회원가입</S.ButtonText>
           </Link>
-        </div>
+        </S.AuthLink>
       </S.SigninCard>
     </S.Signin>
   );
