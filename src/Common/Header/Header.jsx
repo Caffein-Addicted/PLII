@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import * as S from './Header.styled';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,10 +8,8 @@ import { db } from '../../firebase';
 import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { getUserInfo, resetUserInfo } from '../../redux/UserInfo';
 import Logo from '../../Images/logo.svg';
-import { useState } from 'react';
 
 const Header = () => {
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [id, setId] = useState();
   const navigate = useNavigate();
@@ -79,7 +76,6 @@ const Header = () => {
   if (isLoggedIn) {
     fetchUserData();
   }
-
 
   return (
     <>
