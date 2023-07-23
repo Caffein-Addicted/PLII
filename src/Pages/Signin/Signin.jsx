@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
-import { getUserInfo } from '../redux/UserInfo';
+import { getUserInfo } from '../../Redux/UserInfo';
+import * as S from './Signin.styled';
+import ButtonGoogle from '../../Images/btn_google.svg';
 
 const Signin = () => {
   const [email, setEmail] = useState('');
@@ -55,28 +57,33 @@ const Signin = () => {
   };
 
   return (
-    <div>
-      <h2>로그인</h2>
-      <form>
+    <S.Signin>
+      <S.SigninCard>
+        <S.Title>로그인</S.Title>
+        <form>
+          <S.ButtonGoogle>
+            <img src={ButtonGoogle} alt="Button Google" />
+          </S.ButtonGoogle>
+          <div>
+            <label>이메일:</label>
+            <input type="text" value={email} onChange={handleEmailChange} />
+          </div>
+          <div>
+            <label>비밀번호:</label>
+            <input type="password" value={password} onChange={handlePasswordChange} />
+          </div>
+          <button type="button" onClick={handleLogin}>
+            로그인
+          </button>
+        </form>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <div>
-          <label>이메일:</label>
-          <input type="text" value={email} onChange={handleEmailChange} />
+          <Link to="/signup">
+            <button>회원가입</button>
+          </Link>
         </div>
-        <div>
-          <label>비밀번호:</label>
-          <input type="password" value={password} onChange={handlePasswordChange} />
-        </div>
-        <button type="button" onClick={handleLogin}>
-          로그인
-        </button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <div>
-        <Link to="/signup">
-          <button>회원가입</button>
-        </Link>
-      </div>
-    </div>
+      </S.SigninCard>
+    </S.Signin>
   );
 };
 

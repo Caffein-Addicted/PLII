@@ -5,9 +5,13 @@ import { db } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { decode } from 'url-safe-base64';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo } from '../redux/UserInfo';
+import { getUserInfo } from '../Redux/UserInfo';
+import { useContext } from 'react';
+import { YoutubeDataContext } from '../context/YoutubeDataContext';
 
 const Mypage = () => {
+  const { videosList, playlists } = useContext(YoutubeDataContext);
+
   const auth = getAuth();
   const user = auth.currentUser;
   const params = useParams();

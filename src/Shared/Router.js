@@ -3,13 +3,13 @@ import Main from '../Pages/Main';
 import Detail from '../Pages/Detail';
 import Mypage from '../Pages/Mypage';
 import Editprofile from '../Pages/Editprofile';
-import Signin from '../Pages/Signin';
+import Signin from '../Pages/Signin/Signin';
 import Signup from '../Pages/Signup';
 import Error from '../Pages/Error';
 import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
-import Search from '../Pages/Search';
 import PlayList from '../Pages/PlayList';
+import Search from '../Pages/Search/Search';
 
 const Router = () => {
   return (

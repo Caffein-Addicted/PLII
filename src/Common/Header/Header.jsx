@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { encode } from 'url-safe-base64';
 import { db } from '../../firebase';
 import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
-import { getUserInfo, resetUserInfo } from '../../redux/UserInfo';
+import { getUserInfo, resetUserInfo } from '../../Redux/UserInfo';
 import Logo from '../../Images/logo.svg';
 
 const Header = () => {
