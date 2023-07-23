@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import * as S from './Header.styled';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,16 +8,22 @@ import { encode } from 'url-safe-base64';
 import { db } from '../../firebase';
 import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { getUserInfo, resetUserInfo } from '../../redux/UserInfo';
-
 import Logo from '../../Images/logo.svg';
+import { useState } from 'react';
 
 const Header = () => {
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [id, setId] = useState();
   const navigate = useNavigate();
   const auth = getAuth();
   const userInfo = useSelector((state) => state.userInfo);
   const dispatch = useDispatch();
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
   useEffect(() => {
     // 컴포넌트가 처음 렌더링될 때 로그인 상태 감지
@@ -73,10 +80,13 @@ const Header = () => {
     fetchUserData();
   }
 
+
   return (
     <>
       <S.Header>
-        <S.Logo src={Logo}></S.Logo>
+        <Link to="/">
+          <S.Logo src={Logo}></S.Logo>
+        </Link>
         <S.ProfileWrap>
           <img src={userInfo.imgfile ?? '/user.png'} alt="프로필 사진" style={{ width: '40px', height: '40px' }} />
           {isLoggedIn ? (
@@ -94,6 +104,12 @@ const Header = () => {
         </S.ProfileWrap>
         <p>로그인하고 숨은 플리 듣기</p>
         <S.Button varient="solid">AI 플리 찾기</S.Button>
+        <form>
+          <input value={inputValue} onChange={handleInputChange}></input>
+          <Link to={`/search/${inputValue}`}>
+            <button disabled={!inputValue.trim()}>검색</button>
+          </Link>
+        </form>
       </S.Header>
     </>
   );

@@ -8,6 +8,7 @@ import Signup from '../Pages/Signup';
 import Error from '../Pages/Error';
 import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
+import Search from '../Pages/Search';
 import PlayList from '../Pages/PlayList';
 
 const Router = () => {
@@ -22,9 +23,10 @@ const Router = () => {
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/editprofile/:id" element={<Editprofile />} />
+            <Route path="/search/:inputValue" element={<Search />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="*" element={<Error />} /> {/* 맨 아래로 이동 */}
+            <Route path="*" element={<Error />} />
           </Routes>
         </Layout>
       </BrowserRouter>
