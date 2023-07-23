@@ -3,14 +3,21 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { YoutubeDataProvider } from './context/YoutubeDataContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const queryClient = new QueryClient();
+
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <QueryClientProvider client={queryClient}>
+    <React.StrictMode>
+      <YoutubeDataProvider>
+        <App />
+      </YoutubeDataProvider>
+    </React.StrictMode>
+  </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
