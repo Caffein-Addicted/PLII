@@ -69,11 +69,13 @@ const Main = () => {
                       handleCardClick(video.snippet.resourceId.videoId);
                     }}
                   >
-                    <img
-                      style={{ maxWidth: '100%', maxHeight: 'auto' }}
-                      src={video.snippet.thumbnails.medium.url}
-                      alt={`${video.snippet.title} 썸네일`}
-                    />
+                    <Link to={`/detail/:${video.id}/:${playlist.id}`}>
+                      <img
+                        style={{ maxWidth: '100%', maxHeight: 'auto' }}
+                        src={video.snippet.thumbnails.medium.url}
+                        alt={`${video.snippet.title} 썸네일`}
+                      />
+                    </Link>
                     <h3>{video.snippet.title}</h3>
                   </div>
                 ))}
