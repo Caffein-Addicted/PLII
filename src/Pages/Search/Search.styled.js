@@ -6,6 +6,7 @@ export const SearchList = styled.div`
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   grid-gap: 8px;
+  padding: 20px;
   
 `
 
@@ -15,7 +16,7 @@ export const SearchCard = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   margin: 10px;
-  padding: 20px;
+  padding: 30px;
   min-height: 360px;
 
 `
@@ -28,6 +29,7 @@ object-fit: cover;
 max-height: 300px;
 border-radius: 10px 10px 0 0;
 margin-left: 50px;
+margin-right: 10px;
 
   
 `
@@ -45,37 +47,29 @@ export const ResultNone = styled.div`
   padding-top:50px;
   border-radius : 10px;
 `
-// .card {
-//   background-color: #fff;
-//   border-radius: 10px;
-//   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-//   width: 100%;
-//   margin: 10px;
-//   padding: 20px;
-//   min-height: 360px;
-// }
 
-// .card img {
-//   width: 100%;
-//   height: auto;
-//   object-fit: cover;
-//   max-height: 300px;
-//   border-radius: 10px 10px 0 0;
-// }
+//searchDetails page
 
-// .card h3 {
-//   font-size: 18px;
-//   font-weight: bold;
-//   margin: 10px 0;
-//   padding: 0 10px;
-// }
-// .carousel-container {
-//   padding-left: 0px;
-//   padding-right: 15px;
-// }
+export const DetailCard = styled.div`
+  background-color: white;
+  width: 800px ;
+  height: 500px;
+  text-align: center;
+  margin-top:20px;
+  margin-left:auto;
+  margin-right: auto;
+  padding:20px;
+  border-radius:20px;
+`
 
-// .carousel-item-padding {
-//   padding: 0px 0px;
-//   display: flex;
-//   justify-content: center;
-// }
+export const Title =styled.div`
+  margin-top:20px;
+  margin-bottom:60px;
+`
+export const BackBtn= styled.button`
+  width: 150px;
+  height: 20px;
+  border-radius:6px;
+  float:right;
+  
+`

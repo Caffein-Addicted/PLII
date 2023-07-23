@@ -54,6 +54,7 @@ const Search = () => {
 
   return (
     <>
+      
       <S.SearchList>
           {filteredVideos.length === 0 ? (
             <S.ResultNone>
@@ -66,7 +67,7 @@ const Search = () => {
                   <Link to={`/video/${video.snippet.resourceId.videoId}`}>
                     <S.ImgCard src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
                   </Link>
-                   <S.CardTitle>{video.snippet.title}</S.CardTitle>
+                   <S.CardTitle>{video.snippet.title}</S.CardTitle>                    
                 </S.SearchCard>
               );
             })

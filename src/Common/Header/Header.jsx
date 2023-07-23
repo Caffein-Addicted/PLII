@@ -104,7 +104,8 @@ const Header = () => {
           <S.Input value={inputValue} onChange={handleInputChange}></S.Input>
           <Link to={`/search/${inputValue}`}>
             <S.SearchBtn disabled={!inputValue.trim()}>
-            🔍
+              <img style={{width:"12px",height:"12px",}} 
+              src='https://mail.google.com/mail/u/0?ui=2&ik=33abe6e57d&attid=0.1&permmsgid=msg-a:r1555485840992906551&th=18981dcb07da3f01&view=att&disp=safe&realattid=f_lkf6ew1f0'></img>              
             </S.SearchBtn>
           </Link>
         </form>

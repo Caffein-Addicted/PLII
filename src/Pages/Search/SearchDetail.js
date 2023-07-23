@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams ,useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import * as S from './Search.styled';
+
 
 const SearchDetail = () => {
   const { videoId } = useParams();
   const [video, setVideo] = useState(null);
   const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw';
-
+  const navigate = useNavigate();
   console.log(videoId);
   useEffect(() => {
     const fetchVideoDetails = async () => {
@@ -27,7 +29,7 @@ const SearchDetail = () => {
 
   return (
     <>
-    <div style={{backgroundColor:"white", width:"800px",height:"500px",}}>
+    <S.DetailCard>
       {video ? (
         <div>
           <iframe
@@ -39,12 +41,14 @@ const SearchDetail = () => {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
           ></iframe>
-          <h1>{video.snippet.title}</h1>
+          <S.Title>{video.snippet.title}</S.Title>
         </div>
       ) : (
-        <p>Loading video details...</p>
+        <p>로딩중입니다...</p>
       )}
-      </div>
+       <S.BackBtn onClick={() => navigate(-1)}>뒤로가기</S.BackBtn>
+      </S.DetailCard>
+     
     </>
   );
 };

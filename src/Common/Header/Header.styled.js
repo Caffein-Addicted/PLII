@@ -67,7 +67,7 @@ export const Input = styled.input`
   width:80%;
   display: inline-block;
   border:none;
-
+  background
 `
 
 export const SearchBtn = styled.button`
