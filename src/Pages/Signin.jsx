@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { Link } from 'react-router-dom';
-import { app } from '../firebase';
+import { Link, useNavigate } from 'react-router-dom';
+import { db } from '../firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { useDispatch } from 'react-redux';
+import { getUserInfo } from '../redux/UserInfo';
 
-const Login = ({ user, setUser }) => {
+const Signin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -29,10 +34,24 @@ const Login = ({ user, setUser }) => {
       await signInWithEmailAndPassword(auth, email, password);
       console.log('로그인 성공:', email);
       window.alert('로그인에 성공했습니다.');
+      fetchUserData();
+      navigate('/');
     } catch (error) {
       console.error('로그인 실패:', error.message);
       setError('로그인에 실패했습니다. 다시 시도해주세요.');
     }
+  };
+
+  const fetchUserData = async () => {
+    const dbUsers = query(collection(db, 'users'), where('email', '==', email));
+
+    const usersData = [];
+
+    const userSnapshot = await getDocs(dbUsers);
+    userSnapshot.forEach((doc) => {
+      usersData.push(doc.data());
+    });
+    dispatch(getUserInfo(...usersData));
   };
 
   return (
@@ -52,19 +71,13 @@ const Login = ({ user, setUser }) => {
         </button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {user ? (
-        <div>
-          <button onClick={() => setUser(null)}>로그아웃</button>
-        </div>
-      ) : (
-        <div>
-          <Link to="/signup">
-            <button>회원가입</button>
-          </Link>
-        </div>
-      )}
+      <div>
+        <Link to="/signup">
+          <button>회원가입</button>
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default Login;
+export default Signin;

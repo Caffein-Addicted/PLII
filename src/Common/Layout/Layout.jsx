@@ -8,7 +8,7 @@ import PlaylistBar from '../PlaylistBar/PlaylistBar';
 const Layout = ({ children }) => {  
   return (
     <>
-      <Header />
+      <Header></Header>
       <S.ContentWrapper>
         {children}
         <Footer />

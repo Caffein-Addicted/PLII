@@ -22,11 +22,11 @@ const Router = () => {
             <Route path="/category/:id" element={<Category />} />
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/mypage/:id" element={<Mypage />} />
-            <Route path="/edit-profile/:id" element={<Editprofile />} />
-            <Route path="*" element={<Error />} />
+            <Route path="/editprofile/:id" element={<Editprofile />} />
             <Route path="/search/:inputValue" element={<Search />} />
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="*" element={<Error />} />
           </Routes>
         </Layout>
       </BrowserRouter>
