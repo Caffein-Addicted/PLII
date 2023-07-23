@@ -8,6 +8,7 @@ import Signup from '../Pages/Signup';
 import Error from '../Pages/Error';
 import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
+import Search from '../Pages/Search/Search';
 import PlayList from '../Pages/PlayList';
 import Search from '../Pages/Search/Search';
 

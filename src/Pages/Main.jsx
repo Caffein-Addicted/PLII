@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { YoutubeDataContext } from '../context/YoutubeDataContext';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -6,7 +6,10 @@ import '../App.css';
 import { Link } from 'react-router-dom';
 
 const Main = () => {
-  const { playlists, videosList } = useContext(YoutubeDataContext);
+  const { playlists, videosList, setVideoId } = useContext(YoutubeDataContext);
+  const handleCardClick = (videoId) => {
+    setVideoId(videoId);
+  };
 
   const responsive = {
     desktop: {
@@ -58,7 +61,14 @@ const Main = () => {
                 itemClass="carousel-item-padding"
               >
                 {videosList[playlist.id].map((video) => (
-                  <div className="card" key={video.id} style={{ textAlign: 'center', padding: '10px' }}>
+                  <div
+                    className="card"
+                    key={video.id}
+                    style={{ textAlign: 'center', padding: '10px' }}
+                    onClick={() => {
+                      handleCardClick(video.snippet.resourceId.videoId);
+                    }}
+                  >
                     <img
                       style={{ maxWidth: '100%', maxHeight: 'auto' }}
                       src={video.snippet.thumbnails.medium.url}
