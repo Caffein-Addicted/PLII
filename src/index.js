@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from './redux/config';
+import store from './Redux/config';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { YoutubeDataProvider } from './context/YoutubeDataContext';
 
@@ -15,11 +15,11 @@ const queryClient = new QueryClient();
 root.render(
   <QueryClientProvider client={queryClient}>
     <React.StrictMode>
-    <Provider store={store}>
-      <YoutubeDataProvider>
-        <App />
-      </YoutubeDataProvider>
-</Provider>
+      <Provider store={store}>
+        <YoutubeDataProvider>
+          <App />
+        </YoutubeDataProvider>
+      </Provider>
     </React.StrictMode>
   </QueryClientProvider>
 );

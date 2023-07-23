@@ -5,6 +5,6 @@ export const playListBar = styled.div`
   z-index: 1000;
   bottom: 0;
   width: 100%;
-  height: 65px;
+  height: 300px;
   background-color: #191919;
 `;

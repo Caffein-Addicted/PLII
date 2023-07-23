@@ -6,7 +6,7 @@ import { query, where, getDocs } from 'firebase/firestore';
 import { app } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getUserInfo } from '../redux/UserInfo';
+import { getUserInfo } from '../Redux/UserInfo';
 
 const Signup = () => {
   // 입력값을 상태로 관리하기 위한 useState 훅 사용

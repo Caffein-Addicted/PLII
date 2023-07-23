@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { useDispatch } from 'react-redux';
-import { getUserInfo } from '../redux/UserInfo';
+import { getUserInfo } from '../Redux/UserInfo';
 
 const Signin = () => {
   const [email, setEmail] = useState('');

@@ -5,7 +5,7 @@ import { db } from '../firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { decode } from 'url-safe-base64';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserInfo } from '../redux/UserInfo';
+import { getUserInfo } from '../Redux/UserInfo';
 
 const Mypage = () => {
   const auth = getAuth();
