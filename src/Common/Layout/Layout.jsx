@@ -1,19 +1,21 @@
-
-import React from 'react';
+import React, { useContext } from 'react';
+import { YoutubeDataContext } from '../../context/YoutubeDataContext';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Player from '../../Pages/Player';
 import * as S from './Layout.styled';
-import PlaylistBar from '../PlaylistBar/PlaylistBar';
 
-const Layout = ({ children }) => {  
+const Layout = ({ children }) => {
+  const { videoId, handleVideoEnd } = useContext(YoutubeDataContext);
+
   return (
     <>
       <Header></Header>
       <S.ContentWrapper>
         {children}
         <Footer />
+        {videoId && <Player videoId={videoId} onVideoEnd={handleVideoEnd} />}
       </S.ContentWrapper>
-      <PlaylistBar />
     </>
   );
 };
