@@ -99,13 +99,16 @@ const Header = () => {
           )}
         </S.ProfileWrap>
         <p>로그인하고 숨은 플리 듣기</p>
-        <S.Button varient="solid">AI 플리 찾기</S.Button>
+        <S.SearchInputBox>
         <form>
-          <input value={inputValue} onChange={handleInputChange}></input>
+          <S.Input value={inputValue} onChange={handleInputChange}></S.Input>
           <Link to={`/search/${inputValue}`}>
-            <button disabled={!inputValue.trim()}>검색</button>
+            <S.SearchBtn disabled={!inputValue.trim()}>
+            🔍
+            </S.SearchBtn>
           </Link>
         </form>
+        </S.SearchInputBox>
       </S.Header>
     </>
   );
