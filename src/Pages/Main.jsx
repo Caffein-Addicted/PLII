@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { YoutubeDataContext } from '../context/YoutubeDataContext';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -7,8 +8,15 @@ import { Link } from 'react-router-dom';
 
 const Main = () => {
   const { playlists, videosList, setVideoId } = useContext(YoutubeDataContext);
-  const handleCardClick = (videoId) => {
+  const navigate = useNavigate();
+  const handleCardClick = (videoId, ClickVideoId, playListId) => {
     setVideoId(videoId);
+    navigate(`/detail/${ClickVideoId}`, {
+      state: {
+        videoId: ClickVideoId,
+        playListId: playListId
+      }
+    });
   };
 
   const responsive = {
@@ -61,21 +69,22 @@ const Main = () => {
                 itemClass="carousel-item-padding"
               >
                 {videosList[playlist.id].map((video) => (
-                  <div className="card" key={video.id} style={{ textAlign: 'center', padding: '10px' }}>
-                    <Link to={`/detail/${video.id}/${playlist.id}`}>
-                      <img
-                        style={{ maxWidth: '100%', maxHeight: 'auto' }}
-                        src={video.snippet.thumbnails.medium.url}
-                        alt={`${video.snippet.title} 썸네일`}
-                      />
-                    </Link>
-                    <h3
-                      onClick={() => {
-                        handleCardClick(video.snippet.resourceId.videoId);
-                      }}
-                    >
-                      {video.snippet.title}
-                    </h3>
+                  <div
+                    className="card"
+                    key={video.id}
+                    style={{ textAlign: 'center', padding: '10px' }}
+                    onClick={() => {
+                      handleCardClick(video.snippet.resourceId.videoId, video.id, playlist.id);
+                    }}
+                  >
+                    {/* <Link to={`/detail/${playlist.id}`}> */}
+                    <img
+                      style={{ maxWidth: '100%', maxHeight: 'auto' }}
+                      src={video.snippet.thumbnails.medium.url}
+                      alt={`${video.snippet.title} 썸네일`}
+                    />
+                    {/* </Link> */}
+                    <h3>{video.snippet.title}</h3>
                   </div>
                 ))}
               </Carousel>

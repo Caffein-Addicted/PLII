@@ -42,7 +42,6 @@ export const SubTitle = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
-
 export const userName = styled.p`
   font-size: 32px;
   color: var(--color-white);

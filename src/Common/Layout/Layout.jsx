@@ -15,6 +15,7 @@ const Layout = ({ children }) => {
         {children}
         {videoId && <Player videoId={videoId} onVideoEnd={handleVideoEnd} />}
         <Footer />
+        {videoId && <Player videoId={videoId} onVideoEnd={handleVideoEnd} />}
       </S.ContentWrapper>
     </>
   );
