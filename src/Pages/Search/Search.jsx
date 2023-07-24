@@ -54,26 +54,25 @@ const Search = () => {
 
   return (
     <>
-      
-      <S.SearchList>
-          {filteredVideos.length === 0 ? (
-            <S.ResultNone>
-              <div> 검색결과가 없습니다. </div>
-            </S.ResultNone>
-          ) : (
-            filteredVideos.map((video) => {
-              return (
-                <S.SearchCard key={video.id}>
-                  <Link to={`/video/${video.snippet.resourceId.videoId}`}>
-                    <S.ImgCard src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
-                  </Link>
-                   <S.CardTitle>{video.snippet.title}</S.CardTitle>                    
-                </S.SearchCard>
-              );
-            })
-          )}
-        
-      </S.SearchList>
+      <S.Title>
+        검색 결과 <S.SearchText>{inputValue}</S.SearchText>
+      </S.Title>
+      <S.SearchItemList>
+        {filteredVideos.length === 0 ? (
+          <p>검색결과가 없습니다. </p>
+        ) : (
+          filteredVideos.map((video) => {
+            return (
+              <S.VideoItem key={video.id} to={`/detail/${video.snippet.resourceId.videoId}`}>
+                <S.Figure>
+                  <S.ImgVideo src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
+                </S.Figure>
+                <S.SubTitle>{video.snippet.title}</S.SubTitle>
+              </S.VideoItem>
+            );
+          })
+        )}
+      </S.SearchItemList>
     </>
   );
 };

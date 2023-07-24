@@ -11,6 +11,8 @@ const GlobalStyle = createGlobalStyle`
         --color-black : #000;
         --color-black-300 : #393939;
         --color-gray : #999;
+        --color-gray-100: #e7e7e9;
+        --color-gray-200: #F3F3F4;
     }
 
     * {
@@ -27,7 +29,8 @@ const GlobalStyle = createGlobalStyle`
     }
     a{
         color: #fff;
-        line-height: 1.8;
+        text-decoration: none;
+        display: inline-block;
     }
 
 `;

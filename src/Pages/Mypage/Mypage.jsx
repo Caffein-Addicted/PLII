@@ -19,7 +19,6 @@ const Mypage = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.userInfo);
-
   const getRandomIndex = (legth) => {
     return parseInt(Math.random() * legth);
   };
@@ -45,7 +44,6 @@ const Mypage = () => {
   useEffect(() => {
     fetchUserData();
   });
-
   const fetchUserData = async () => {
     const dbUsers = query(collection(db, 'users'), where('email', '==', atob(decode(params.id))));
 
