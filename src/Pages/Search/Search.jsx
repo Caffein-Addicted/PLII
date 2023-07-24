@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import * as S from './Search.styled';
 
 const Search = () => {
   const [videos, setVideos] = useState([]);
@@ -53,22 +54,25 @@ const Search = () => {
 
   return (
     <>
-      <div className="search-list">
-        <div className="card">
-          {filteredVideos.length === 0 ? (
-            <p>검색결과가 없습니다. </p>
-          ) : (
-            filteredVideos.map((video) => {
-              return (
-                <div className="search-item" key={video.id}>
-                  <img src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
-                  <p className="playlist-item-text">{video.snippet.title}</p>
-                </div>
-              );
-            })
-          )}
-        </div>
-      </div>
+      <S.Title>
+        검색 결과 <S.SearchText>{inputValue}</S.SearchText>
+      </S.Title>
+      <S.SearchItemList>
+        {filteredVideos.length === 0 ? (
+          <p>검색결과가 없습니다. </p>
+        ) : (
+          filteredVideos.map((video) => {
+            return (
+              <S.VideoItem key={video.id} to={`/detail/${video.snippet.resourceId.videoId}`}>
+                <S.Figure>
+                  <S.ImgVideo src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
+                </S.Figure>
+                <S.SubTitle>{video.snippet.title}</S.SubTitle>
+              </S.VideoItem>
+            );
+          })
+        )}
+      </S.SearchItemList>
     </>
   );
 };

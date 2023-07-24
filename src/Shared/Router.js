@@ -8,7 +8,7 @@ import Signup from '../Pages/Signup/Signup';
 import Error from '../Pages/Error';
 import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
-import PlayList from '../Pages/PlayList';
+import PlayList from '../Pages/PlayList/PlayList';
 import Search from '../Pages/Search/Search';
 
 const Router = () => {
@@ -24,7 +24,6 @@ const Router = () => {
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/editprofile/:id" element={<Editprofile />} />
             <Route path="/search/:inputValue" element={<Search />} />
-
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<Error />} />

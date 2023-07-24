@@ -1,11 +1,25 @@
 import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { YoutubeDataContext } from '../context/YoutubeDataContext';
+import { YoutubeDataContext } from '../../context/YoutubeDataContext';
 import { Link } from 'react-router-dom';
+import * as S from './PlayList.styled';
+import { useSelector } from 'react-redux';
+import icoPlayList from '../../Images/ico_add_playlist.svg';
+import icoLike from '../../Images/ico_like.svg';
 
 const Playlist = () => {
   const { videosList, playlists } = useContext(YoutubeDataContext);
   const { playlistId } = useParams();
+  const userInfo = useSelector((state) => state.userInfo);
+
+  const selectAll = (selectAll) => {
+    const checkboxes = document.getElementsByName('checkBox');
+
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = selectAll.checked;
+    });
+  };
+
   const playlist = playlists.find((p) => p.id === playlistId);
   const totalCount = videosList[playlistId] ? videosList[playlistId].length : 0;
   const scrollBarStyle = `
@@ -66,35 +80,70 @@ const Playlist = () => {
       </style>
       {playlist ? (
         <div>
-          <div style={playlistInfoStyle}>
-            <img src={playlist.snippet.thumbnails.medium.url} alt={`${playlist.snippet.title} 썸네일`} />
-            <div>
-              <h2
-                style={{
-                  fontSize: '30px',
-                  marginBottom: '30px'
-                }}
-              >
-                {playlist.snippet.title}
-              </h2>
-              <p>{playlist.snippet.description}</p>
-              <p>노래 {totalCount}곡</p>
-            </div>
-          </div>
-          <div style={videoListStyle}>
+          <S.PlayListWrapper>
+            <S.PlayListBackground>
+              <S.BgOverlay />
+              <S.PlayListBackgroundImg src={playlist.snippet.thumbnails.medium.url} />
+            </S.PlayListBackground>
+
+            <S.PlaylistInner>
+              <S.PlayListFigure>
+                <S.PlayListImg src={playlist.snippet.thumbnails.medium.url} alt={`${playlist.snippet.title} 썸네일`} />
+              </S.PlayListFigure>
+              <S.PlaylistInfo>
+                <S.Title>{playlist.snippet.title}</S.Title>
+                <S.Description>{playlist.snippet.description}</S.Description>
+                <S.Count> {totalCount}곡</S.Count>
+              </S.PlaylistInfo>
+            </S.PlaylistInner>
+          </S.PlayListWrapper>
+
+          <S.VideoList>
+            <S.VideoListItem>
+              <div>
+                <input
+                  name="allCheckBox"
+                  type="checkbox"
+                  value="checkBox"
+                  onClick={() => {
+                    selectAll();
+                  }}
+                />
+                <S.ItemTitle>{totalCount}곡</S.ItemTitle>
+              </div>
+
+              <S.iconWrapper>
+                <S.iconList>
+                  <img src={`${icoLike}`} />
+                </S.iconList>
+                <S.iconList>
+                  <img src={`${icoPlayList}`} />
+                </S.iconList>
+              </S.iconWrapper>
+            </S.VideoListItem>
+
             {videosList[playlistId] ? (
               videosList[playlistId].map((video) => (
-                <div style={{ margin: '10px' }} key={video.id}>
-                  <input type="checkbox" id={video.id} name={video.snippet.title} />
-                  <label style={{ margin: '10px' }} htmlFor={video.id}>
-                    {video.snippet.title}
-                  </label>
-                </div>
+                <S.VideoListItem key={video.id}>
+                  <div>
+                    <input type="checkbox" id={video.id} value="checkBox" name={video.snippet.title} />
+                    <S.ItemTitle htmlFor={video.id}>{video.snippet.title}</S.ItemTitle>
+                  </div>
+
+                  <S.iconWrapper>
+                    <S.iconList>
+                      <img src={`${icoLike}`} />
+                    </S.iconList>
+                    <S.iconList>
+                      <img src={`${icoPlayList}`} />
+                    </S.iconList>
+                  </S.iconWrapper>
+                </S.VideoListItem>
               ))
             ) : (
               <div>로딩중...</div>
             )}
-          </div>
+          </S.VideoList>
           <h1
             style={{
               marginTop: '20px',
