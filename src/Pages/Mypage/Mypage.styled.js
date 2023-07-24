@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { style } from 'styled-system';
 
 export const PlaylistWrapper = styled.div`
   margin-bottom: 38px;
