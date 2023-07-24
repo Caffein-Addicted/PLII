@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-<<<<<<< HEAD
-import { useParams } from 'react-router-dom';
-=======
 import { useParams, Link } from 'react-router-dom';
->>>>>>> 5be7e782f7cb665d441e321f7f0c8c7d122ca23a
 import * as S from './Search.styled';
 
 const Search = () => {
@@ -58,7 +54,6 @@ const Search = () => {
 
   return (
     <>
-<<<<<<< HEAD
       <S.Title>
         검색 결과 <S.SearchText>{inputValue}</S.SearchText>
       </S.Title>
@@ -78,28 +73,6 @@ const Search = () => {
           })
         )}
       </S.SearchItemList>
-=======
-      
-      <S.SearchList>
-          {filteredVideos.length === 0 ? (
-            <S.ResultNone>
-              <div> 검색결과가 없습니다. </div>
-            </S.ResultNone>
-          ) : (
-            filteredVideos.map((video) => {
-              return (
-                <S.SearchCard key={video.id}>
-                  <Link to={`/video/${video.snippet.resourceId.videoId}`}>
-                    <S.ImgCard src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
-                  </Link>
-                   <S.CardTitle>{video.snippet.title}</S.CardTitle>                    
-                </S.SearchCard>
-              );
-            })
-          )}
-        
-      </S.SearchList>
->>>>>>> 5be7e782f7cb665d441e321f7f0c8c7d122ca23a
     </>
   );
 };

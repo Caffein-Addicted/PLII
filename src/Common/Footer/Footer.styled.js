@@ -12,6 +12,7 @@ export const Footer = styled.footer`
   text-align: center;
   display: flex;
   justify-content: space-between;
+  margin-top: 120px;
 `;
 
 export const Bold = styled.span`
