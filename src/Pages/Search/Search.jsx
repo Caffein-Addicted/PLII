@@ -63,7 +63,7 @@ const Search = () => {
         ) : (
           filteredVideos.map((video) => {
             return (
-              <S.VideoItem key={video.id} to={`/detail/${video.snippet.resourceId.videoId}`}>
+              <S.VideoItem key={video.id} to={`/video/${video.snippet.resourceId.videoId}`}>
                 <S.Figure>
                   <S.ImgVideo src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
                 </S.Figure>

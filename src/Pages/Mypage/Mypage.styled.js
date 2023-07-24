@@ -132,3 +132,6 @@ export const PlaylistTitle = styled.h2`
   font-size: 24px;
   color: #fff;
 `;
+export const MypageText = styled.p`
+  color: #fff;
+`;
