@@ -70,7 +70,7 @@ const Mypage = () => {
   return (
     <>
       <div>
-        <h2>마이페이지</h2>
+        <S.PlaylistTitle>마이페이지</S.PlaylistTitle>
         {user ? (
           <>
             <div>
@@ -80,8 +80,8 @@ const Mypage = () => {
                 alt="프로필 사진"
                 style={{ width: '100px', height: '100px' }}
               />
-              <p>이메일: {userInfo.email}</p>
-              <p>이름: {userInfo.name}</p>
+              <S.MypageText>이메일: {userInfo.email}</S.MypageText>
+              <S.MypageText>이름: {userInfo.name}</S.MypageText>
               <button onClick={handleLogout}>로그아웃</button>
               {/* 프로필 설정 페이지로 이동하는 버튼 */}
               <Link to={`/editprofile/${params.id}`}>프로필 설정</Link>

@@ -7,7 +7,7 @@ const Search = () => {
   const [videos, setVideos] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   const { inputValue } = useParams();
-  const api_key = 'AIzaSyAZnWv1VW6jvGMVhmMHyUexlF5G8E6qxJw';
+  const api_key = 'AIzaSyDM-1RORRYYPbvhRfOulQhvfbbKHrKsNWw';
   const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Search = () => {
         ) : (
           filteredVideos.map((video) => {
             return (
-              <S.VideoItem key={video.id} to={`/detail/${video.snippet.resourceId.videoId}`}>
+              <S.VideoItem key={video.id} to={`/video/${video.snippet.resourceId.videoId}`}>
                 <S.Figure>
                   <S.ImgVideo src={video.snippet.thumbnails.high.url} alt={video.snippet.title} />
                 </S.Figure>
