@@ -44,9 +44,9 @@ const Mypage = () => {
   useEffect(() => {
     fetchUserData();
   });
+
   const fetchUserData = async () => {
     const dbUsers = query(collection(db, 'users'), where('email', '==', atob(decode(params.id))));
-
     const usersData = [];
 
     const userSnapshot = await getDocs(dbUsers);
@@ -70,25 +70,31 @@ const Mypage = () => {
   return (
     <>
       <div>
-        <S.PlaylistTitle>마이페이지</S.PlaylistTitle>
         {user ? (
           <>
-            <div>
-              {/* 프로필 이미지 표시 */}
-              <img
-                src={userInfo.imgfile ? userInfo.imgfile : '/user.png'}
-                alt="프로필 사진"
-                style={{ width: '100px', height: '100px' }}
-              />
-              <S.MypageText>이메일: {userInfo.email}</S.MypageText>
-              <S.MypageText>이름: {userInfo.name}</S.MypageText>
-              <button onClick={handleLogout}>로그아웃</button>
-              {/* 프로필 설정 페이지로 이동하는 버튼 */}
-              <Link to={`/editprofile/${params.id}`}>프로필 설정</Link>
-            </div>
-            <div>
+            <S.ProfileWrapper>
+              <S.ProfileInner>
+                {/* 프로필 이미지 표시 */}
+                <S.ProfileFigure>
+                  <S.ProfileImg src={userInfo.imgfile ? userInfo.imgfile : '/user.png'} alt="프로필 사진" />
+                </S.ProfileFigure>
+                <S.ProfileInfo>
+                  <S.userName> {userInfo.name}</S.userName>
+                  <S.userEmail> {userInfo.email}</S.userEmail>
+                  {/* 프로필 설정 페이지로 이동하는 버튼 */}
+                  <S.ButtonText to={`/editprofile/${params.id}`}>프로필 설정</S.ButtonText>
+                  <S.ButtonLogOut onClick={handleLogout}>로그아웃</S.ButtonLogOut>
+                </S.ProfileInfo>
+              </S.ProfileInner>
+
+              <S.ProfileBackground>
+                <S.ProfileBackgroundImg src={userInfo.imgfile ? userInfo.imgfile : '/user.png'} />
+                <S.BgOverlay></S.BgOverlay>
+              </S.ProfileBackground>
+            </S.ProfileWrapper>
+
+            <S.PlayListWrapper>
               <S.Title>{userInfo.name} 님을 위한 추천 플레이리스트</S.Title>
-              <S.PlaylistTitle>{playlists[3].snippet.title}</S.PlaylistTitle>
               <Carousel
                 autoPlay
                 autoPlaySpeed={2000}
@@ -99,16 +105,39 @@ const Mypage = () => {
               >
                 {videosList[playlists[3].id].map((video) => {
                   return (
-                    <div>
-                      <div key={video.id}>
-                        <img src={video.snippet.thumbnails.medium.url} />
-                        <p>{video.snippet.title}</p>
-                      </div>
-                    </div>
+                    <S.VideoItem key={video.id}>
+                      <S.Figure>
+                        <S.ImgVideo src={video.snippet.thumbnails.medium.url} />
+                      </S.Figure>
+                      <S.SubTitle>{video.snippet.title}</S.SubTitle>
+                    </S.VideoItem>
                   );
                 })}
               </Carousel>
-            </div>
+            </S.PlayListWrapper>
+
+            <S.PlayListWrapper>
+              <S.Title>투데이</S.Title>
+              <Carousel
+                autoPlay
+                autoPlaySpeed={2000}
+                responsive={responsive}
+                infinite={true}
+                containerClass="carousel-container"
+                itemClass="carousel-item-padding"
+              >
+                {videosList[playlists[4].id].map((video) => {
+                  return (
+                    <S.VideoItem key={video.id}>
+                      <S.Figure>
+                        <S.ImgVideo src={video.snippet.thumbnails.medium.url} />
+                      </S.Figure>
+                      <S.SubTitle>{video.snippet.title}</S.SubTitle>
+                    </S.VideoItem>
+                  );
+                })}
+              </Carousel>
+            </S.PlayListWrapper>
           </>
         ) : (
           <p>로그인이 필요합니다.</p>

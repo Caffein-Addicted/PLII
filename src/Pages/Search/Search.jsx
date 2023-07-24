@@ -7,7 +7,7 @@ const Search = () => {
   const [videos, setVideos] = useState([]);
   const [filteredVideos, setFilteredVideos] = useState([]);
   const { inputValue } = useParams();
-  const api_key = 'AIzaSyDM-1RORRYYPbvhRfOulQhvfbbKHrKsNWw';
+  const api_key = process.env.REACT_APP_YOUTUBE_API_KEY;
   const channel_id = 'UCRbI1cqUoaea8LTJA2q9ShA';
 
   useEffect(() => {
