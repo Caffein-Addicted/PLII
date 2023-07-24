@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { variant } from 'styled-system';
 
 const buttonVariants = {
   solid: {

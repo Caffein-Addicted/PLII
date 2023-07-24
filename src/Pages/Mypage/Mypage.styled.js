@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { style } from 'styled-system';
 
 export const PlaylistWrapper = styled.div`
   margin-bottom: 38px;
@@ -119,4 +118,8 @@ export const ButtonText = styled.a`
 export const ButtonLogOut = styled.button`
   display: block;
   margin-top: 48px;
+`;
+export const PlaylistTitle = styled.h2`
+  font-size: 24px;
+  color: #fff;
 `;
