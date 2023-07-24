@@ -119,6 +119,7 @@ export const ButtonLogOut = styled.button`
   display: block;
   margin-top: 48px;
 `;
+
 export const PlaylistTitle = styled.h2`
   font-size: 24px;
   color: #fff;

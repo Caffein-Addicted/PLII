@@ -5,6 +5,9 @@ import icoNext from '../../Images/ico_next.svg';
 import icoPrev from '../../Images/ico_prev.svg';
 import icoShuffle from '../../Images/ico_shuffle.svg';
 import icoRandom from '../../Images/ico_random.svg';
+import icoPlayList from '../../Images/ico_playlist.svg';
+import icoSound from '../../Images/ico_sound.svg';
+import icoPause from '../../Images/ico_pause.svg';
 
 const Player = ({ videoId }) => {
   const [isPlaying, setIsPlaying] = useState(true);
@@ -45,7 +48,18 @@ const Player = ({ videoId }) => {
 
   return (
     <>
+      <S.YoutubeVideo
+        title="Youtube Video Player"
+        width="100%"
+        height="100%"
+        src={videoSrc}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
+        allowFullScreen
+      ></S.YoutubeVideo>
+
       <S.playBar>
+
         <div>
           <iframe
             id="player"
@@ -58,6 +72,15 @@ const Player = ({ videoId }) => {
             allowFullScreen
           ></iframe>
         </div>
+        <S.PlayBarLeftWrapper>
+          <S.PlayBarAlbum>
+            <img />
+          </S.PlayBarAlbum>
+          <S.PlayBarContentWrapper>
+            <S.PlayBarTitle>Super Shy</S.PlayBarTitle>
+            <S.PlayBarArtist>NewJeans</S.PlayBarArtist>
+          </S.PlayBarContentWrapper>
+        </S.PlayBarLeftWrapper>
         <div>
           <S.playIconWrapper>
             <li>
@@ -72,7 +95,7 @@ const Player = ({ videoId }) => {
             </li>
             <li>
               <S.Play onClick={togglePlay}>
-                <img src={isPlaying ? `${icoPlay}` : `${icoPlay}`} />
+                <img src={isPlaying ? `${icoPause}` : `${icoPlay}`} />
               </S.Play>
             </li>
             <li>
@@ -87,9 +110,18 @@ const Player = ({ videoId }) => {
             </li>
           </S.playIconWrapper>
         </div>
-        <div>
+        <S.playIconRightWrapper>
+          <S.VideoTime>00:00 / 00:00</S.VideoTime>
+          <S.SoundBar>
+            <S.IcoSound src={`${icoSound}`} />
+            <S.SoundBarWrapper>
+              <S.SoundBarProgress>        <div>
           <input type="range" min="0" max="100" value={volume} onChange={onVolumeChange} />
-        </div>
+        </div></S.SoundBarProgress>
+            </S.SoundBarWrapper>
+          </S.SoundBar>
+          <S.IcoPlayList src={`${icoPlayList}`} />
+        </S.playIconRightWrapper>
       </S.playBar>
     </>
   );
