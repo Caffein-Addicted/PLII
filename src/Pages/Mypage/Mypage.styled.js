@@ -1,5 +1,8 @@
 import styled from 'styled-components';
+<<<<<<< HEAD
 import { Link } from 'react-router-dom';
+=======
+>>>>>>> 901b16fb754bc93f06dcc1637f192a265d7d041b
 
 export const PlaylistWrapper = styled.div`
   margin-bottom: 38px;
