@@ -26,6 +26,8 @@ const Signin = () => {
   const handleLogin = async () => {
     const auth = getAuth();
 
+    console.log('버튼클릭!');
+
     try {
       setError(null); // 이전 에러 초기화
       if (!email || !password) {

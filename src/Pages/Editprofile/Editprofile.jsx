@@ -1,9 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { db } from '../firebase';
+import { db } from '../../firebase';
 import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { decode } from 'url-safe-base64';
+import * as S from './Editprofile.styled';
+import { getUserInfo } from '../../Redux/UserInfo';
+import { useSelector } from 'react-redux';
 
 const Editprofile = () => {
   const auth = getAuth();
@@ -16,6 +19,7 @@ const Editprofile = () => {
   const [bio, setBio] = useState();
   const [photoFile, setPhotoFile] = useState(null);
   const imgRef = useRef();
+  const userInfo = useSelector((state) => state.userInfo);
 
   useEffect(() => {
     fetchUserData();
@@ -83,31 +87,39 @@ const Editprofile = () => {
 
   return (
     <div>
-      <h2>프로필 편집</h2>
+      <S.Title>프로필 편집</S.Title>
+      <S.ProfileFigure>
+        <S.ProfileImg src={userInfo.imgfile ? userInfo.imgfile : '/user.png'} alt="프로필 사진" />
+      </S.ProfileFigure>
       <form>
-        <div>
-          <label>이름:</label>
-          <input type="text" value={name} onChange={handleNameChange} />
-        </div>
-        <div>
-          <label>닉네임:</label>
-          <input type="text" value={nickName} onChange={handleNickNameChange} />
-        </div>
-        <div>
-          <label>소개글:</label>
-          <input type="text" value={bio} onChange={handleBioChange} />
-        </div>
-        <div>
-          <label>프로필 사진:</label>
-          <input type="file" accept="image/png, image/jpeg, image/jpg" ref={imgRef} onChange={handlePhotoFileChange} />
-        </div>
-        <button type="button" onClick={handleSave}>
+        <S.InputItem>
+          <S.InputLabel>이름:</S.InputLabel>
+          <S.Input type="text" value={name} onChange={handleNameChange} />
+        </S.InputItem>
+        <S.InputItem>
+          <S.InputLabel>닉네임:</S.InputLabel>
+          <S.Input type="text" value={nickName} onChange={handleNickNameChange} />
+        </S.InputItem>
+        <S.InputItem>
+          <S.InputLabel>소개글:</S.InputLabel>
+          <S.Input type="text" value={bio} onChange={handleBioChange} />
+        </S.InputItem>
+        <S.InputItem>
+          <S.InputLabel>프로필 사진:</S.InputLabel>
+          <S.InputImg
+            type="file"
+            accept="image/png, image/jpeg, image/jpg"
+            ref={imgRef}
+            onChange={handlePhotoFileChange}
+          />
+        </S.InputItem>
+        <S.Button type="button" onClick={handleSave}>
           저장
-        </button>
+        </S.Button>
       </form>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <div>
-        <Link to={`/mypage/${params.id}`}>마이페이지로 돌아가기</Link>
+        <S.ButtonText to={`/mypage/${params.id}`}>마이페이지로 돌아가기</S.ButtonText>
       </div>
     </div>
   );
