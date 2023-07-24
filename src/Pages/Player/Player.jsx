@@ -37,7 +37,7 @@ const Player = ({ videoId }) => {
     );
   }, [volume]);
 
-  const videoSrc = `https://www.youtube.com/embed/${videoId}?enablejsapi=1`;
+  const videoSrc = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0`;
 
   const onVolumeChange = (e) => {
     setVolume(e.target.value);
