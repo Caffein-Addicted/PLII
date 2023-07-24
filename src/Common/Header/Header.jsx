@@ -99,13 +99,17 @@ const Header = () => {
           )}
         </S.ProfileWrap>
         <p>로그인하고 숨은 플리 듣기</p>
-        <S.Button varient="solid">AI 플리 찾기</S.Button>
+        <S.SearchInputBox>
         <form>
-          <input value={inputValue} onChange={handleInputChange}></input>
+          <S.Input value={inputValue} onChange={handleInputChange}></S.Input>
           <Link to={`/search/${inputValue}`}>
-            <button disabled={!inputValue.trim()}>검색</button>
+            <S.SearchBtn disabled={!inputValue.trim()}>
+              <img style={{width:"12px",height:"12px",}} 
+              src='https://mail.google.com/mail/u/0?ui=2&ik=33abe6e57d&attid=0.1&permmsgid=msg-a:r1555485840992906551&th=18981dcb07da3f01&view=att&disp=safe&realattid=f_lkf6ew1f0'></img>              
+            </S.SearchBtn>
           </Link>
         </form>
+        </S.SearchInputBox>
       </S.Header>
     </>
   );
