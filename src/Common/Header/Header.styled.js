@@ -55,3 +55,27 @@ export const ProfileLoginLink = styled(Link)`
   text-decoration: none;
   cursor: pointer;
 `;
+
+// search input 
+export const SearchInputBox = styled.div`
+  width: 100%;
+  background-color:white;
+  border-radius:5px;
+  padding : 0px;
+`
+export const Input = styled.input`
+  width:80%;
+  display: inline-block;
+  border:none;
+  background
+`
+
+export const SearchBtn = styled.button`
+  display: inline-block;
+  border:none;
+  background-color:transparent;
+  margin-left:1px;
+    &:focus {
+     outline:none;
+  }
+`

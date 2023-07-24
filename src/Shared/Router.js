@@ -10,7 +10,12 @@ import Category from '../Pages/Category';
 import Layout from '../Common/Layout/Layout';
 import PlayList from '../Pages/PlayList/PlayList';
 import Search from '../Pages/Search/Search';
+<<<<<<< HEAD
 
+=======
+import PlayList from '../Pages/PlayList';
+import SearchDetail from '../Pages/Search/SearchDetail'
+>>>>>>> 5be7e782f7cb665d441e321f7f0c8c7d122ca23a
 const Router = () => {
   return (
     <>
@@ -20,10 +25,11 @@ const Router = () => {
             <Route path="/" element={<Main />} />
             <Route path="/playlist/:playlistId" element={<PlayList />} />
             <Route path="/category/:id" element={<Category />} />
-            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/detail/:videoId" element={<Detail />} />
             <Route path="/mypage/:id" element={<Mypage />} />
             <Route path="/editprofile/:id" element={<Editprofile />} />
             <Route path="/search/:inputValue" element={<Search />} />
+            <Route path="/video/:videoId" element={<SearchDetail/>}/>
             <Route path="/signin" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<Error />} />
