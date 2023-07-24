@@ -7,6 +7,7 @@ import * as S from './Main.styled';
 import '../../App.css';
 import bannerImg from '../../Images/banner.png';
 import IcoSpecial from '../../Images/icon_special.png';
+import icoPlay from '../../Images/ico_play.svg';
 
 const Main = () => {
   const { playlists, videosList, setVideoId } = useContext(YoutubeDataContext);
@@ -74,9 +75,17 @@ const Main = () => {
                       handleCardClick(video.snippet.resourceId.videoId);
                     }}
                   >
-                    <S.Figure>
-                      <S.ImgVideo src={video.snippet.thumbnails.medium.url} alt={`${video.snippet.title} 썸네일`} />
-                    </S.Figure>
+                    <div>
+                      <S.Figure>
+                        <S.ImgVideo src={video.snippet.thumbnails.medium.url} alt={`${video.snippet.title} 썸네일`} />
+
+                        <S.ButtonPlayWrapper>
+                          <S.ButtonPlay>
+                            <img src={`${icoPlay}`} />
+                          </S.ButtonPlay>
+                        </S.ButtonPlayWrapper>
+                      </S.Figure>
+                    </div>
                     <S.SubTitle>{video.snippet.title}</S.SubTitle>
                   </S.VideoItem>
                 ))}

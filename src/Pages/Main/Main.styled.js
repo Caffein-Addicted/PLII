@@ -24,6 +24,7 @@ export const VideoItem = styled.div`
 `;
 
 export const Figure = styled.figure`
+  position: relative;
   height: 160px;
 `;
 
@@ -92,4 +93,36 @@ export const BannerTime = styled.p`
   color: var(--color-gray);
   line-height: 1.4;
   margin-top: 18px;
+`;
+
+export const ButtonPlayWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 999;
+  display: none;
+  transition: 0.2 ease;
+
+  &:hover {
+    display: block;
+    transition: 0.2 ease;
+  }
+`;
+
+export const ButtonPlay = styled.a`
+  position: absolute;
+  z-index: 999;
+  background-color: #000;
+  padding-left: 4px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  z-index: 99;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;

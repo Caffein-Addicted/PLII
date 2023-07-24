@@ -9,7 +9,7 @@ export const playBar = styled.div`
   background-color: #191919;
   width: 100%;
   height: 65px;
-  padding: 0 62px;
+  padding: 0 62px 0 0;
 `;
 
 export const playIconWrapper = styled.ul`
@@ -97,4 +97,8 @@ export const PlayBarLeftWrapper = styled.div`
 
 export const PlayBarContentWrapper = styled.div`
   margin-left: 14px;
+`;
+
+export const Iframe = styled.iframe`
+  /* display: none; */
 `;

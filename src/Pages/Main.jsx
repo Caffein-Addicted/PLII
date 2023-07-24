@@ -5,6 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import '../App.css';
 import { Link } from 'react-router-dom';
+import icoPlay from '../../Images/ico_play.svg';
 
 const Main = () => {
   const { playlists, videosList, setVideoId } = useContext(YoutubeDataContext);

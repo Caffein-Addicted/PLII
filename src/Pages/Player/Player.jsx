@@ -8,7 +8,7 @@ import icoRandom from '../../Images/ico_random.svg';
 import icoPause from '../../Images/ico_pause.svg';
 
 const Player = ({ videoId }) => {
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(100);
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
@@ -37,7 +37,7 @@ const Player = ({ videoId }) => {
     );
   }, [volume]);
 
-  const videoSrc = `https://www.youtube.com/embed/${videoId ? videoId : 'dQw4w9WgXcQ'}?enablejsapi=1`;
+  const videoSrc = `https://www.youtube.com/embed/${videoId}?enablejsapi=1`;
 
   const onVolumeChange = (e) => {
     setVolume(e.target.value);
@@ -47,16 +47,16 @@ const Player = ({ videoId }) => {
     <>
       <S.playBar>
         <div>
-          <iframe
+          <S.Iframe
             id="player"
             title="Youtube Video Player"
-            width="100%"
-            height="100%"
+            width="120px"
+            height="65px"
             src={videoSrc}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
             allowFullScreen
-          ></iframe>
+          ></S.Iframe>
         </div>
         <div>
           <S.playIconWrapper>
