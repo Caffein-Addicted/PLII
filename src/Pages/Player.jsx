@@ -1,4 +1,5 @@
 import React from 'react';
+import '../App.css';
 
 const Player = ({ videoId }) => {
   const videoSrc = `https://www.youtube.com/embed/${videoId}?autoplay=1`;

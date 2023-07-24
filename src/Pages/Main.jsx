@@ -61,22 +61,21 @@ const Main = () => {
                 itemClass="carousel-item-padding"
               >
                 {videosList[playlist.id].map((video) => (
-                  <div
-                    className="card"
-                    key={video.id}
-                    style={{ textAlign: 'center', padding: '10px' }}
-                    onClick={() => {
-                      handleCardClick(video.snippet.resourceId.videoId);
-                    }}
-                  >
-                    <Link to={`/detail/:${video.id}/:${playlist.id}`}>
+                  <div className="card" key={video.id} style={{ textAlign: 'center', padding: '10px' }}>
+                    <Link to={`/detail/${video.id}/${playlist.id}`}>
                       <img
                         style={{ maxWidth: '100%', maxHeight: 'auto' }}
                         src={video.snippet.thumbnails.medium.url}
                         alt={`${video.snippet.title} 썸네일`}
                       />
                     </Link>
-                    <h3>{video.snippet.title}</h3>
+                    <h3
+                      onClick={() => {
+                        handleCardClick(video.snippet.resourceId.videoId);
+                      }}
+                    >
+                      {video.snippet.title}
+                    </h3>
                   </div>
                 ))}
               </Carousel>
